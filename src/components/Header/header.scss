@@ -1,0 +1,205 @@
+@use "../../scss/" as *;
+
+.header {
+  @include themify($themes) {
+    display: flex;
+    justify-content: space-between;
+    height: $height-header;
+    background-color: themed(bg);
+    -webkit-box-shadow: -4px 10px 9px -8px themed(border);
+    -moz-box-shadow: -4px 10px 9px -8px themed(border);
+    box-shadow: -4px 10px 9px -8px themed(border);
+    padding: 0px 16px;
+    position: sticky;
+    top:0;
+    .header__left {
+      max-width: 360px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      flex:1;
+      @include desktop {
+        & {
+          max-width: 390px;
+        }
+      }
+
+     
+      img {
+        max-width: 45px;
+        height: 45px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      &__search {
+        background-color: themed(bgSoft);
+        border-radius: 200px;
+        min-width: 240px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include desktop {
+          & {
+           min-width: 40px;
+           cursor: pointer;
+          }
+        }
+        display: flex;
+        align-items: center;
+        height: 40px;
+        gap: 10px;
+        padding: 0px 10px;
+        color: themed(textColor);
+        input {
+          outline: none;
+          border: none;
+          color: themed(textColorSoft);
+          background-color: transparent;
+          height: 100%;
+          font-size: 1.5rem;
+          padding: 5px 0px 5px 10px;
+          flex: 1;
+          &::placeholder {
+            color: currentColor;
+          }
+          @include desktop {
+            & {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .header__center {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      @include mobile {
+        display: none;
+      }
+     
+      &__icon {
+        font-size: 2.64rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 41px;
+        position: relative;
+        cursor: pointer;
+        max-width: 110px;
+        color:themed(textColorSoft);
+          @include desktop {
+            max-width: 100px;
+            padding: 0px 20px;
+          }
+          @include tablet {
+            & {
+              padding: 0px 10px;
+            }
+          }
+        & .text-hover {
+          display: none;
+        }
+        &:hover .text-hover {
+          display: flex;
+        }
+        &:hover {
+          background-color: rgba(0,0,0,0.1);
+          height: 80%;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          margin: 10% 0px;
+        }
+        &.select {
+          color: $primary-color;
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            top:calc(100% - 4px);
+           background-color:$primary-color;
+          }
+          &:hover {
+            height: 100%;
+           
+            background-color: transparent;
+            border-radius:unset;
+          }
+        }
+      }
+    }
+    .header__right {
+      max-width: 360px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap:8px;
+      flex:1;
+      &__one {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: themed(bgSoft);
+        color:themed(textColor);
+        border-radius: 50%;
+        position: relative;
+        transition: all 0.1s linear;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        & .text-hover {
+          display: none;
+        }
+
+        &:hover .text-hover {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      &__avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: relative;
+        img {
+          max-width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+        &__notifi {
+          position: absolute;
+          top:-3px;
+          right: -3px;
+          background-color: red;
+          width: 19px;
+          height: 19px;
+          border-radius: 50%;
+          color:white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.3rem;
+        }
+        &__icon {
+          font-size: 1.9rem;
+          color:currentColor;
+        }
+      }
+    }
+  }
+}
+
+
+

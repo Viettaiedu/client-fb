@@ -1,0 +1,12 @@
+@use '../../scss/' as *;
+.main {
+    @include themify($themes) {
+      display: flex;
+      background-color: themed(bgSoft);
+      height: 100%;
+    }
+
+    .right-bar {
+      width: 360px;
+    }
+}
