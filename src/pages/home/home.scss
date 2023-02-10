@@ -1,1 +1,8 @@
 
+@use '../../scss/' as *;
+.home {
+    @include themify($themes) {
+        margin: 0px 150px;
+        
+    }
+}

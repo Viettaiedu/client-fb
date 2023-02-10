@@ -13,6 +13,7 @@
     background-color: themed(bg);
     border-radius: 10px;
     padding: 0px 10px;
+    z-index: 99;
     &__setting {
       display: flex;
       justify-content: flex-start;
@@ -71,7 +72,7 @@
       flex-direction: column;
       color: themed(textColor);
       padding: 0px 2px 20px 2px;
-      
+      position: relative;
       &__future {
         display: flex;
         gap: 10px;

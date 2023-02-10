@@ -31,7 +31,7 @@ function Header() {
               return () => {
                      document.removeEventListener('mousedown', handleClickOutsideAccount);
               }
-       })
+       },[accountRef])
     return (
         <div className='header'>
                  <Link  to={routesPublic.home} className='header__left'>

@@ -7,11 +7,11 @@ import { BsChevronCompactDown,BsChevronCompactUp } from 'react-icons/bs';
 
 //---My imports
 import './left-bar.scss';
-import {imagesLeftBar} from '../../assets/image-icons';
+import {imagesLeftBar , imagesBottomLeftBar} from '../../assets/image-icons';
 import {routesPublic} from '../../config/routes';
 function LeftBar() {
     const [items , setItems] = useState(imagesLeftBar.slice(0,5));
-    const [itemsShortcuts , setItemsShortcuts] = useState(imagesLeftBar.slice(0,5));
+    const [itemsShortcuts , setItemsShortcuts] = useState(imagesBottomLeftBar.slice(0,5));
     const [showAdd , setShowAdd] = useState(true);
     const [shortcuts , setShortcuts] = useState(true);
     const handleShow = () => {
@@ -23,11 +23,11 @@ function LeftBar() {
         setShowAdd(true);
     }
     const handleShowShortcuts = () => {
-        setItemsShortcuts(imagesLeftBar);
+        setItemsShortcuts(imagesBottomLeftBar);
         setShortcuts(false);
     }
     const handleHideShortcuts = () => {
-        setItemsShortcuts(imagesLeftBar.slice(0,5));
+        setItemsShortcuts(imagesBottomLeftBar.slice(0,5));
         setShortcuts(true);
     }
     return (<div className='left-bar'>
