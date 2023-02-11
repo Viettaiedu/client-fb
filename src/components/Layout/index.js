@@ -11,7 +11,7 @@ import './layout.scss';
       <Header />
       <div className="main">
       <LeftBar />
-        <div style={{flex:"1"}}>{children}</div>
+        <div className='home'>{children}</div>
         <RightBar />
       </div>
     </div>

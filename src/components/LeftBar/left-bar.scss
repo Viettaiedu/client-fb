@@ -10,6 +10,12 @@
         top:calc($height-header);
         overflow: scroll;  
         z-index: 1; 
+
+        @include desktop {
+            & {
+                display: none;
+            }
+        }
         &::-webkit-scrollbar {
             background-color: transparent;
             width: 9px;

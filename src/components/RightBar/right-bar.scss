@@ -8,6 +8,13 @@
     top:calc($height-header);
     overflow: scroll;  
     z-index: 1; 
+
+    @include desktop {
+        & {
+            padding: 0px 10px 0px 20px;
+            display: none;
+        }
+    }
     &__items {
         display: flex;
         gap:10px;
@@ -119,6 +126,13 @@
                 display: flex;
                 gap:10px;
                 align-items: center;
+                transition:  background-color 0.1s linear;
+                padding: 6px 0px;
+                cursor: pointer;
+                border-radius: 4px;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                }
                &__image {
                 width: 32px;
                 height: 32px;

@@ -19,7 +19,7 @@
       gap: 5px;
       align-items: center;
       flex:1;
-      @include desktop {
+      @include desktop-xl  {
         & {
           max-width: 390px;
         }
@@ -40,7 +40,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        @include desktop {
+        @include desktop-xl  {
           & {
            min-width: 40px;
            cursor: pointer;
@@ -64,7 +64,7 @@
           &::placeholder {
             color: currentColor;
           }
-          @include desktop {
+          @include desktop-xl  {
             & {
               display: none;
             }
@@ -93,7 +93,7 @@
         cursor: pointer;
         max-width: 110px;
         color:themed(textColorSoft);
-          @include desktop {
+          @include desktop-xl  {
             max-width: 100px;
             padding: 0px 20px;
           }

@@ -1,5 +1,11 @@
 @use './variables' as * ;
 
+
+@mixin desktop-xl () {
+    @media screen and (max-width:$desktop-xl) {
+            @content;
+    }
+}
 @mixin desktop () {
     @media screen and (max-width:$desktop) {
             @content;

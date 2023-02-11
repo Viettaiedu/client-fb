@@ -2,9 +2,8 @@
 import Stories from '../../components/Stories';
 import './home.scss';
 function Home() {
-    return (  <div className='home'>
-
+    return (  < >
         <Stories />
-    </div>);
+    </>);
 }
 export default Home;
