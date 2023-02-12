@@ -11,8 +11,10 @@ import "swiper/css/scrollbar";
 //--My imports
 import Story from "../Story";
 import "./stories.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {stories,stories2 } from '../../assets/data-stories';
+import { routesPublic } from "../../config/routes";
+import { Link } from "react-router-dom";
 function Stories() {
     const navigationNextRef = useRef(null);
   const navigationPrevRef = useRef(null);
@@ -81,7 +83,7 @@ function Stories() {
             <>
               {story.current ? (
                 <SwiperSlide key={index}>
-                  <div className="stories__story">
+                  <Link to={routesPublic.storiesCreate} className="stories__story">
                     <div className="stories__story__image-story"></div>
                     <div className="stories__story__current-user"></div>
                     <div
@@ -92,7 +94,7 @@ function Stories() {
                       <GrAddCircle />
                       <span>Tạo tin</span>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ) : (
                 <>
@@ -111,7 +113,7 @@ function Stories() {
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={3}
-          slidesPerView={5}
+          slidesPerView={3}
                     navigation
                     breakpoints= {{
           768 : {

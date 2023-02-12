@@ -3,6 +3,7 @@
 .home {
     @include themify($themes) {
         margin: 0px 150px;
+        flex:1;
         @include desktop-xl {
             & {
                 margin: 0px 0px 0px 10px;

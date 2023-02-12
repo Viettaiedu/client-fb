@@ -2,6 +2,7 @@ import "./right-bar.scss";
 
 import { AiTwotoneVideoCamera, AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import Button from "../Button";
 function RightBar() {
   const suggestAddFriends = [
     {
@@ -27,13 +28,9 @@ function RightBar() {
                 <h6>{item.name}</h6>
                 <span>{item.createdAt}</span>
               </div>
-              <div className="right-bar__items__item__right__btns">
-                <button className="right-bar__items__item__right__btns__confirm">
-                  Xác nhận
-                </button>
-                <button className="right-bar__items__item__right__btns__reject">
-                  Xóa
-                </button>
+              <div className="btns">
+              <Button btnConfirm={true} text="Xác nhận"/>
+              <Button btnReject={true} text="Xóa"/>
               </div>
             </div>
           </div>

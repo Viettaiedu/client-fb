@@ -1,0 +1,8 @@
+
+@use '../../scss/' as *;
+
+.profile {
+    @include themify($themes) {
+        
+    }
+}

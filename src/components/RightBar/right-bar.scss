@@ -89,31 +89,7 @@
                     }
                 }
 
-                &__btns {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    button {
-                        width: 48%;
-                        border-radius: 5px;
-                        outline: none;
-                        border-radius: 1px solid transparent;
-                        border: none;
-                        padding: 10px 20px;
-                        font-weight: 700;
-                    }
-
-                    &__confirm {
-                        background-color:$primary-color;
-                        color:white;
-                    }
-
-                    &__reject {
-                            background-color: rgba(0,0,0,0.1);
-                            color:rgba(0, 0, 0, 0.63);
-                    }
-                }
+              
             }
         }
 

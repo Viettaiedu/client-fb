@@ -12,15 +12,16 @@ import {IoMdNotifications } from 'react-icons/io';
 import {CgGames } from 'react-icons/cg';
 import {Link} from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-
 //-------My import
 import TextHover from './TextHover';
 import {routesPublic} from '../../config/routes';
 import Account from './Account';
-
+import ComNotification from '../../components/notification';
 function Header() {
        const [showAccountSetting , setShowAccountSetting] = useState(false);
+       const [showNotification , setShowNotification] = useState(false);
        const accountRef = useRef();
+       const notificationRef = useRef();
        useEffect(() => {
               function handleClickOutsideAccount(e) {
                      if(accountRef.current &&  !accountRef.current.contains(e.target)) {
@@ -32,6 +33,18 @@ function Header() {
                      document.removeEventListener('mousedown', handleClickOutsideAccount);
               }
        },[accountRef])
+
+       useEffect(() => {
+              function handleClickOutsideAccount(e) {
+                     if(notificationRef.current &&  !notificationRef.current.contains(e.target)) {
+                            setShowNotification(false);
+                     }
+              }
+              document.addEventListener('mousedown', handleClickOutsideAccount);
+              return () => {
+                     document.removeEventListener('mousedown', handleClickOutsideAccount);
+              }
+       },[notificationRef])
     return (
         <div className='header'>
                  <Link  to={routesPublic.home} className='header__left'>
@@ -75,12 +88,13 @@ function Header() {
                      </div>
                      <div className='header__right__one'  >
                             <TextHover text={"Thông báo"}/>
-                            <IoMdNotifications className='header__right__one__icon'/>
+                            <IoMdNotifications className='header__right__one__icon' onClick={() => setShowNotification(!showNotification)}/>
                             <span className='header__right__one__notifi'>5</span>
+                          {showNotification &&  <ComNotification notificationRef={notificationRef}/>} 
                      </div>
-                     <div className='header__right__one'>
+                     <div className='header__right__one' >
                             <TextHover text={"Tài khoản"}/>
-                            <img className='header__right__one__avatar' src='/no-image.webp' alt='' onClick={() => setShowAccountSetting(true)}/>
+                            <img className='header__right__one__avatar' src='/no-image.webp' alt='' onClick={() => setShowAccountSetting(!showAccountSetting)} />
                           {showAccountSetting &&  <Account setShowAccountSetting={setShowAccountSetting} accountRef={accountRef}/>} 
                      </div>
                  </div>

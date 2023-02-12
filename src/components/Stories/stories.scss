@@ -14,6 +14,13 @@
    -webkit-box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
 -moz-box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
 box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
+@include desktop-xl {
+  max-width: 520px;
+}
+
+@include mobile {
+  max-width: 370px;
+}
     &__item {
       flex: 1;
       font-weight: 500;
@@ -63,7 +70,7 @@ box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
   @include themify($themes) {
     display: none;
     padding: 20px;
-    max-width: 664px;
+    width: 664px;
     overflow: hidden;
     margin-bottom: 20px;
     background-color: themed(bg);
@@ -74,7 +81,13 @@ box-shadow: 0px 0px 32px -8px rgba(0,0,0,0.92);
    height: 240px;
    gap:6px;
    position: relative;
+    @include desktop-xl {
+      max-width: 520px;
+    }
 
+    @include mobile {
+      max-width: 370px;
+    }
    &.select {
     display: flex;
 
@@ -210,3 +223,4 @@ box-shadow: 0px 0px 32px -8px rgba(0,0,0,0.92);
    
   }
 }
+
