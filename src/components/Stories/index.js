@@ -11,13 +11,14 @@ import "swiper/css/scrollbar";
 //--My imports
 import Story from "../Story";
 import "./stories.scss";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {stories,stories2 } from '../../assets/data-stories';
 import { routesPublic } from "../../config/routes";
 import { Link } from "react-router-dom";
 function Stories() {
-    const navigationNextRef = useRef(null);
+  const navigationNextRef = useRef(null);
   const navigationPrevRef = useRef(null);
+
     const handleStories = (e) => {
         const items = document.querySelectorAll('.stories-menu__item');
         const stories = document.querySelectorAll('.stories');

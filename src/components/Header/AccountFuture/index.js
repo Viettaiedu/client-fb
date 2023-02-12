@@ -1,10 +1,6 @@
 
 
-import {AiTwotoneSetting} from 'react-icons/ai';
-import {IoIosHelpCircle } from 'react-icons/io';
-import {FaMoon} from 'react-icons/fa';
-import {RiFolderWarningFill ,RiLogoutBoxRFill} from 'react-icons/ri';
-import {BsArrowLeft, BsChevronCompactRight} from 'react-icons/bs';
+import {BsArrowLeft} from 'react-icons/bs';
 import {Link} from 'react-router-dom';
 
 //-my imports
@@ -13,7 +9,7 @@ import {routesPublic} from '../../../config/routes';
 import React, { useState } from 'react';
 import Futures from '../Futures';
 import {accountFutures , settingFutures , heplerFutures , screenFutures} from '../../../assets/futures';
-function Account({accountRef,setShowAccountSetting}) {
+function AccountFuture({accountRef,setShowAccountSetting}) {
     const [showFuturesAccount , setShowFuturesAccount] = useState(true);
     const [showFuturesSetting , setShowFuturesSetting] = useState(false);
     const [showFuturesHelper , setShowFuturesHelper] = useState(false);
@@ -59,4 +55,4 @@ function Account({accountRef,setShowAccountSetting}) {
     </div>  );
 }
 
-export default React.forwardRef(Account);
+export default React.forwardRef(AccountFuture);

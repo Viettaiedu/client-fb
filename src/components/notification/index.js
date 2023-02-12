@@ -7,7 +7,7 @@ import { forwardRef } from 'react';
 
 
 ///My imports
-import {newNotification , invitationNotification , afterNotification} from '.././../assets/data-notification';
+import {newNotification , invitationNotification , afterNotification} from '../../assets/data-notification';
 import './notification.scss';
 import Button from '../Button';
 function ComNotification({notificationRef}) {

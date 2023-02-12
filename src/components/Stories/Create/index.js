@@ -10,24 +10,8 @@ import { Link } from "react-router-dom";
 // -my imports
 import './create.scss';
 import { routesPublic } from "../../../config/routes";
-import { useEffect, useRef, useState } from "react";
-import Account from "../../Header/Account";
-import TextHover from "../../Header/TextHover";
-import { IoMdNotifications } from "react-icons/io";
+import HeaderRight from "../../Header/HeaderRight";
 function Create() {
-    const [showAccountSetting , setShowAccountSetting] = useState(false);
-    const accountRef = useRef();
-    useEffect(() => {
-        //    function handleClickOutsideAccount(e) {
-        //           if(accountRef.current &&  !accountRef.current.contains(e.target)) {
-        //                  setShowAccountSetting(false);
-        //           }
-        //    }
-        //    document.addEventListener('mousedown', handleClickOutsideAccount);
-        //    return () => {
-        //           document.removeEventListener('mousedown', handleClickOutsideAccount);
-        //    }
-    },[accountRef])
     return ( 
         <div className="stories-create">
                 <div className="stories-create__left">
@@ -58,19 +42,7 @@ function Create() {
                     </div>
                 </div>
                 <div className="stories-create__right-header">
-                        <span className="stories-create__right-header__icon"><CgMenuGridR/>
-                        <TextHover text={"Menu"}/>
-                        </span>
-                        <span className="stories-create__right-header__icon"><IoMdNotifications/>
-                        <TextHover text={"Thông báo"}/>
-                             <span className='stories-create__right-header__icon__notifi'>5</span>
-                        </span>
-                        <span className="stories-create__right-header__icon">
-                        <TextHover text={"Tài khoản"}/>
-                        <img src='/no-image.webp' alt='' onClick={() => setShowAccountSetting(!showAccountSetting)}/>
-                          {showAccountSetting &&  <Account setShowAccountSetting={setShowAccountSetting} accountRef={accountRef}/>} 
-                        
-                        </span>
+                  <HeaderRight isHideMessage={true}/>
                 </div>
         </div>
      );
