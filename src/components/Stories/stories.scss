@@ -46,6 +46,7 @@ box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
       &.select  {
           position: relative;
           width: 100%;
+          color:$primary-color;
           &::after {
               position: absolute;
               content: "";
@@ -54,12 +55,6 @@ box-shadow: 0px 0px 32px -12px rgba(0,0,0,0.92);
               height: 3px;
               background-color: $primary-color;
               bottom: -5px;
-          }
-          .stories-menu__item__icon {
-            color:$primary-color;
-          }
-          span {
-              color:$primary-color;
           }
       }
     }

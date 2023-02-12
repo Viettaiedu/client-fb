@@ -19,6 +19,19 @@
         overflow: auto;
         height: 80vh;
         flex-direction: column;
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 9px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(128, 128, 128, 0.61);
+            width: 9px;
+            border-radius: 20px;
+        }
+        &::-webkit-resizer {
+            resize: both;
+        }
         &__header {
             display: flex;
             align-items: center;

@@ -68,8 +68,10 @@
             &__icon {
                 width: 29px;
                 height: 29px;
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgba(255,0,0,0.1);
                 border-radius: 50%;
+                font-weight: 900;
+                font-size: 2rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;

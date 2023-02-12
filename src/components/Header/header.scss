@@ -158,6 +158,13 @@
         &:hover {
             background-color: rgba(0,0,0,0.1);
         }
+        &.select {
+          background-color: rgba(0, 170, 255, 0.364);
+
+          & .header__right__one__icon {
+            color:blue;
+          }
+        }
 
         & .text-hover {
           display: none;
