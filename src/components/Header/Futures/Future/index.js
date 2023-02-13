@@ -55,8 +55,8 @@ function Future({ future, fcShowFutures, typeOther }) {
           </div>
           <div className="account__futures__future__nodes">
           {future.text === screenFutures[0].text &&  <>
-            <div className="account__futures__future__nodes__node"><span>Tắt</span>  <span  className={`account__futures__future__nodes__node__${darkMode ? "turn-off":"turn-on"}`} onClick={handleSetOff}></span></div>
-                <div className="account__futures__future__nodes__node"><span>Bật</span> <span  className={`account__futures__future__nodes__node__${!darkMode ? "turn-off":"turn-on"}`} onClick={handleSetOn}></span></div>
+            <div className="account__futures__future__nodes__node" onClick={handleSetOff}><span>Tắt</span>  <span  className={`account__futures__future__nodes__node__${darkMode ? "turn-off":"turn-on"}`} ></span></div>
+                <div className="account__futures__future__nodes__node" onClick={handleSetOn}><span>Bật</span> <span  className={`account__futures__future__nodes__node__${!darkMode ? "turn-off":"turn-on"}`} ></span></div>
           </>}
           {future.text === screenFutures[1].text &&  <>
             <div className="account__futures__future__nodes__node"><span>Tắt</span>  <span  className={`account__futures__future__nodes__node__turn-off`}></span></div>

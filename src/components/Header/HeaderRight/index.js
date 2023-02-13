@@ -7,11 +7,17 @@ import ComNotification from '../../Notification';
 import AccountFuture from "../AccountFuture";
 import { useEffect, useRef, useState } from "react";
 import './header-right.scss';
+import Chat from "../../Chat";
+import Menu from "../../Menu";
 function HeaderRight({isHideMessage}) {
     const [showAccountSetting, setShowAccountSetting] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const accountRef = useRef();
   const notificationRef = useRef();
+  const chatRef = useRef();
+  const menuRef = useRef();
   useEffect(() => {
     function handleClickOutsideAccount(e) {
       const el = document.querySelector(".header__right__one.select");
@@ -21,6 +27,7 @@ function HeaderRight({isHideMessage}) {
         if (accountRef.current && !accountRef.current.contains(e.target)) {
           setShowAccountSetting(false);
         }
+        console.log(accountRef)
       }
     }
     document.addEventListener("mousedown", handleClickOutsideAccount);
@@ -48,17 +55,57 @@ function HeaderRight({isHideMessage}) {
       document.removeEventListener("mousedown", handleClickOutsideAccount);
     };
   }, [notificationRef]);
+  useEffect(() => {
+    function handleClickOutsideAccount(e) {
+      const el = document.querySelector(".header__right__one.select");
+      if (el && el.title === "chat" && el.contains(e.target)) {
+        setShowChat(true);
+      } else {
+        if (
+          chatRef.current &&
+          !chatRef.current.contains(e.target)
+        ) {
+          setShowChat(false);
+        }
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutsideAccount);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideAccount);
+    };
+  }, [chatRef]);
+  useEffect(() => {
+    function handleClickOutsideAccount(e) {
+      const el = document.querySelector(".header__right__one.select");
+      if (el && el.title === "menu" && el.contains(e.target)) {
+        setShowMenu(true);
+      } else {
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(e.target)
+        ) {
+          setShowMenu(false);
+        }
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutsideAccount);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideAccount);
+    };
+  }, [menuRef]);
     return ( <div className="header__right">
-    <div className="header__right__one mobile-none ">
-      <TiThMenu className="header__right__one__icon " />
+    <div className={`header__right__one ${showMenu ? "select" : ""} mobile-none`} title="menu">
+      <TiThMenu className="header__right__one__icon " onClick={() => setShowMenu(!showMenu)}/>
       <TextHover text={"Menu"} />
+     {showMenu &&  <Menu ref={menuRef}/>}
     </div>
-    <div className="header__right__one mobile-display screen-large-992-node">
+    <div className="header__right__one mobile-display screen-large-992-none">
       <GrAdd className="header__right__one__icon " />
     </div>
-    {!isHideMessage && <div className="header__right__one">
-      <FaFacebookMessenger className="header__right__one__icon" />
+    {!isHideMessage && <div className={`header__right__one ${showChat ? "select" : ""}`} title="chat">
+      <FaFacebookMessenger className="header__right__one__icon"   onClick={() => setShowChat(!showChat)}/>
       <TextHover text={"Messenger"} />
+    {showChat &&  <Chat  ref={chatRef}/>} 
     </div>}
     
     <div
@@ -72,7 +119,7 @@ function HeaderRight({isHideMessage}) {
       />
       <span className="header__right__one__notifi">5</span>
       {showNotification && (
-        <ComNotification notificationRef={notificationRef} />
+        <ComNotification ref={notificationRef} />
       )}
     </div>
     <div
@@ -89,7 +136,7 @@ function HeaderRight({isHideMessage}) {
       {showAccountSetting && (
         <AccountFuture
           setShowAccountSetting={setShowAccountSetting}
-          accountRef={accountRef}
+          ref={accountRef}
         />
       )}
     </div>

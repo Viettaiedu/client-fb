@@ -50,7 +50,7 @@ function Stories() {
         <div className="stories-menu__item" onClick={handleStories}>
           <BsFillBookFill />
           <span className="mobile-none">Phòng họp mặt</span>
-          <span className="screen-large-992-node mobile-display">Phòng họp</span>
+          <span className="screen-large-992-none mobile-display">Phòng họp</span>
         </div>
       </div>
       {/* Stories bottom */}

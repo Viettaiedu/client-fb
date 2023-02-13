@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 //-------My import
 import TextHover from "./TextHover";
 import { routesPublic } from "../../config/routes";
-import AccountFuture from './AccountFuture';
 import HeaderRight from "./HeaderRight";
 function Header() {
   return (
@@ -25,7 +24,7 @@ function Header() {
             placeholder="Tìm kiểm trên Facebook"
           />
         </div>
-        <div className="header__left__search mobile-display screen-large-992-node">
+        <div className="header__left__search mobile-display screen-large-992-none">
           <TiThMenu />
         </div>
       </Link>

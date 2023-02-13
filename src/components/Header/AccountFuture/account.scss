@@ -125,12 +125,14 @@
           flex-direction: column;
           &__node {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-
             span {
               font-size: 1.5rem;
               padding: 2px 5px;
+              &:first-child {
+                width: 100%;
+              }
+              
             }
             &__turn-on {
               display: block;

@@ -10,9 +10,10 @@ import { forwardRef } from 'react';
 import {newNotification , invitationNotification , afterNotification} from '../../assets/data-notification';
 import './notification.scss';
 import Button from '../Button';
-function ComNotification({notificationRef}) {
+const ComNotification = forwardRef((props, ref) => 
+{
     return (  
-        <div className="notifications" ref={notificationRef}>
+        <div className="notifications" ref={ref}>
                 <div className='notifications__header'>
                     <h2 >Thông báo</h2>
                     <span className='notifications__header__more-icon'>
@@ -88,6 +89,6 @@ function ComNotification({notificationRef}) {
                 </div>
         </div>
     );
-}
+});
 
-export default forwardRef(ComNotification);
+export default ComNotification;

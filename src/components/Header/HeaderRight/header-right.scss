@@ -31,11 +31,10 @@
         }
       }
 
-      & .text-hover {
+      &>.text-hover {
         display: none;
       }
-
-      &:hover .text-hover {
+       &:hover>.text-hover {
         display: flex;
         align-items: center;
         justify-content: center;
