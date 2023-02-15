@@ -20,7 +20,7 @@ const CreatePost = forwardRef(({setShowCreateShare} , ref ) =>
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
+console.log(file);
   const emojiRef = useRef();
   useEffect(() => {
     function handleClickOutside(event) {
