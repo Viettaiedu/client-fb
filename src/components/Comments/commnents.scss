@@ -1,0 +1,159 @@
+@use "../../scss/" as *;
+
+.comments {
+  @include themify($themes) {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    &__comment {
+      display: flex;
+      gap: 12px;
+      position: relative;
+        
+      &__image {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+            position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 1px solid rgba(128, 128, 128, 0.561);
+        }
+
+       
+      }
+
+      &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 1;
+        &__name {
+          font-weight: 600;
+         
+        }
+
+        p {
+          max-width: 529px;
+
+         
+        }
+      }
+      &__createdAt {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        font-size: 1.2rem;
+        font-weight: 500;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        .loading & {
+          @include skeleton;
+        }
+      }
+    }
+    &__current-user {
+      display: flex;
+      width: calc(100% - 20px);
+      bottom: 0px;
+      left: 10px;
+      gap: 10px;
+      align-items: center;
+
+      &__image {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+       
+      }
+
+      &__input {
+        flex: 1;
+        position: relative;
+       
+        input {
+          width: 100%;
+          height: 100%;
+          padding: 10px;
+          outline: none;
+          border: none;
+          background-color: rgba(128, 128, 128, 0.2);
+          color: themed(textColor);
+          font-size: 1.5rem;
+          border-radius: 20px;
+          &::placeholder {
+            color: themed(textColor);
+          }
+        }
+      }
+
+      &__send {
+        padding: 6px 10px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        background-color: rgb(0, 98, 255);
+        color: white;
+        font-weight: 700;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: background-color 0.1s ease-in-out;
+
+        &:hover {
+          background-color: rgba(0, 38, 255, 0.814);
+        }
+        
+      }
+    }
+
+    &.loading .comments__comment__image  ,
+    &.loading .comments__current-user__image,
+    &.loading .comments__comment__info ,
+    &.loading .comments__comment__info__name span ,
+    &.loading .comments__comment__info__name p ,
+    &.loading .comments__comment__createdAt ,
+    &.loading .comments__current-user img ,
+    &.loading .comments__current-user__input ,
+    &.loading .emoij ,
+    &.loading .comments__current-user__send  {
+      @include skeleton;
+    }
+
+    &.loading .comments__comment__image::before  ,
+    &.loading .comments__comment__info::before  ,
+    &.loading .comments__comment__info__name span::before  ,
+    &.loading .comments__comment__info__name p::before  ,
+    &.loading .comments__comment__createdAt::before  ,
+    &.loading .comments__current-user__input::before  ,
+    &.loading .emoij::before  ,
+    &.loading .comments__current-user__image::before,
+    &.loading .comments__current-user__send::before   {
+        @include skeleton-before;
+    }
+    &.loading .comments__comment__image::after  ,
+    &.loading .comments__comment__info::after  ,
+    &.loading .comments__comment__info__name span::after  ,
+    &.loading .comments__comment__info__name p::after  ,
+    &.loading .comments__comment__createdAt::after  ,
+    &.loading .comments__current-user__input::after  ,
+    &.loading .emoij::after  ,
+    &.loading .comments__current-user__image::after,
+    &.loading .comments__current-user__send::after   {
+        @include skeleton-after;
+    }
+
+  
+}
+
+}

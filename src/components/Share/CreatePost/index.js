@@ -3,7 +3,7 @@ import { GrClose } from "react-icons/gr";
 //-my imports
 import "./create-post.scss";
 import CEmojiPicker from "../../CEmojiPicker";
-import { MdLibraryAdd } from "react-icons/md";
+import { MdInsertEmoticon, MdLibraryAdd } from "react-icons/md";
 import ErrorMesssage from "../../ErrorMessage";
 
 
@@ -62,12 +62,17 @@ const CreatePost = forwardRef(({setShowCreateShare} , ref ) =>
               placeholder="Viết ơi,bạn đang nghĩ gì vậy"
               onChange={handleChange}
             />
-            <CEmojiPicker
-              showEmoji={showEmoji}
+             <span  className="emoij" >
+             <MdInsertEmoticon onClick={handleClick}/>
+
+             {showEmoji && <CEmojiPicker
               handleEmoijClick={handleEmoijClick}
               ref={emojiRef}
               handleClick={handleClick}
-            />
+            />}
+             </span>
+         
+          
           </div>
           <div className="create-post__center__upload">
             {!file && (
