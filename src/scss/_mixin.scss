@@ -8,9 +8,8 @@ $themes: (
     bgSoft: #f0f2f5,
     textColorSoft: #555,
     border: lightgray,
-    bgHover:#39393A,
-    textHover:whitesmoke,
-
+    bgHover: #39393a,
+    textHover: whitesmoke,
   ),
   dark: (
     textColor: whitesmoke,
@@ -19,9 +18,8 @@ $themes: (
     bgSoft: #333,
     textColorSoft: lightgray,
     border: #444,
-    bgHover:white,
-    textHover:#39393A,
-    
+    bgHover: white,
+    textHover: #39393a,
   ),
 );
 @mixin themify($themes) {
@@ -45,4 +43,37 @@ $themes: (
 
 @function themed($key) {
   @return map-get($theme-map, $key);
+}
+
+@mixin hoverAvatar($color: $gray-light) {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    border-radius: 50%;
+    transition: background-color 0.1s linear;
+  }
+  &:hover::after {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@mixin box-shadow($light-color: rgba(0, 0, 0, 0.92)) {
+  -webkit-box-shadow: 0px 0px 32px -12px $light-color;
+  -moz-box-shadow: 0px 0px 32px -12px $light-color;
+  box-shadow: 0px 0px 32px -12px $light-color;
+}
+
+@mixin border($outline:none , $border:none) {
+  border:$border;
+  outline:$outline;
+}
+
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

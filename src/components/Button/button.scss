@@ -28,7 +28,7 @@
             border-radius: 5px;
         }
         &:hover::after {
-            background-color: rgba(0,0,0,0.1);
+            background-color: $gray-light;
         }
     }
 
@@ -37,7 +37,7 @@
         color:white;
     }
     &__reject {
-            background-color: rgba(0,0,0,0.1);
+            background-color: $gray-light;
             color:themed(textColor);
     }
 }

@@ -50,7 +50,7 @@
                 transition: background-color 0.1s linear;
                 margin-right: 10px;
                 &:hover {
-                    background-color: rgba(0,0,0,0.1);
+                    background-color: $gray-light;
                 }
 
                 svg {
@@ -111,7 +111,7 @@
                     margin-right: 5px;
                     border-radius: 10px;
                     &:hover {
-                        background-color: rgba(0,0,0,0.1);
+                        background-color: $gray-light;
                     }
                 }
             }

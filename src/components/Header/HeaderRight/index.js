@@ -27,7 +27,6 @@ function HeaderRight({isHideMessage}) {
         if (accountRef.current && !accountRef.current.contains(e.target)) {
           setShowAccountSetting(false);
         }
-        console.log(accountRef)
       }
     }
     document.addEventListener("mousedown", handleClickOutsideAccount);
