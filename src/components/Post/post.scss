@@ -51,6 +51,9 @@
                     &__createdAt {
                         font-size: 1.2rem;
                         font-weight: 200;
+                        width: 100px;
+                        height: 20px;
+                        color:themed(textColor);
                     }
                 }
                 &__options {
@@ -70,7 +73,9 @@
                         height: 30px;
                         border-radius: 50%;
                         transition: background-color 0.1s ease-in-out;
-
+                        svg {
+                            color:themed(textColor);
+                        }
                         &:hover {
                             background-color: rgba(0, 0, 0, 0.1);
                         }
@@ -83,13 +88,18 @@
                 flex-direction: column;
                 gap:5px;
                 
-                p {
+                &__desc{
                     padding: 0px 10px;
+                    color:themed(textColor);
                 }
-                img {
+                &__image {
                     width: 100%;
                     height: 400px;
-                    object-fit: cover;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
             }
 
@@ -103,12 +113,13 @@
                     flex:1;
                     @include flex-center;
                     gap:10px;
-
+                    cursor: pointer;
+                    color:themed(textColor);
                     svg {
                         font-size: 2rem;
                     }
                 }
             }
-                
+        
         }
     }

@@ -64,15 +64,26 @@
                 padding: 10px 9px;
             }
         }
-          input {
-              padding: 10px 10px;
-              flex: 1;
-              outline: none;
-              border-radius: 5px;
-              border:1px solid rgba(128, 128, 128, 0.679);
-              color:gray;
-              font-size: 1.6rem;
-          }
+
+        span {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            input {
+                padding: 10px 10px;
+                width: 100%;    
+                flex: 1;
+                outline: none;
+                border-radius: 5px;
+                border:1px solid rgba(128, 128, 128, 0.679);
+                color:black;
+                font-size: 1.6rem;
+            }
+
+            span {
+                color:red;
+            }
+        }
       }
 
       button {
@@ -99,5 +110,9 @@
         color:#1A77F2;
         font-weight: 700;
         margin: 0px 100px;
+    }
+
+    .err-account {
+        color:red;
     }
 }

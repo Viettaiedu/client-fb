@@ -5,11 +5,13 @@ import { TiThMenu } from "react-icons/ti";
 import TextHover from "../TextHover";
 import ComNotification from '../../Notification';
 import AccountFuture from "../AccountFuture";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import './header-right.scss';
 import Chat from "../../Chat";
 import Menu from "../../Menu";
+import { UserContext } from "../../../context/authContext";
 function HeaderRight({isHideMessage}) {
+  const {currentUser} = useContext(UserContext);
     const [showAccountSetting, setShowAccountSetting] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showChat, setShowChat] = useState(false);
@@ -128,8 +130,8 @@ function HeaderRight({isHideMessage}) {
       <TextHover text={"Tài khoản"} />
       <img
         className="header__right__one__avatar"
-        src="/no-image.webp"
-        alt=""
+        src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/no-image.webp"  }
+        alt={currentUser.name}
         onClick={() => setShowAccountSetting(!showAccountSetting)}
       />
       {showAccountSetting && (

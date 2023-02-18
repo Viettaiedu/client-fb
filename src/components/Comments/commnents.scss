@@ -11,7 +11,7 @@
       display: flex;
       gap: 12px;
       position: relative;
-        
+        color:themed(textColor);
       &__image {
         width: 35px;
         height: 35px;
@@ -52,9 +52,7 @@
         position: absolute;
         top: 50%;
         right: 20px;
-        .loading & {
-          @include skeleton;
-        }
+      
       }
     }
     &__current-user {
@@ -116,43 +114,6 @@
         
       }
     }
-
-    &.loading .comments__comment__image  ,
-    &.loading .comments__current-user__image,
-    &.loading .comments__comment__info ,
-    &.loading .comments__comment__info__name span ,
-    &.loading .comments__comment__info__name p ,
-    &.loading .comments__comment__createdAt ,
-    &.loading .comments__current-user img ,
-    &.loading .comments__current-user__input ,
-    &.loading .emoij ,
-    &.loading .comments__current-user__send  {
-      @include skeleton;
-    }
-
-    &.loading .comments__comment__image::before  ,
-    &.loading .comments__comment__info::before  ,
-    &.loading .comments__comment__info__name span::before  ,
-    &.loading .comments__comment__info__name p::before  ,
-    &.loading .comments__comment__createdAt::before  ,
-    &.loading .comments__current-user__input::before  ,
-    &.loading .emoij::before  ,
-    &.loading .comments__current-user__image::before,
-    &.loading .comments__current-user__send::before   {
-        @include skeleton-before;
-    }
-    &.loading .comments__comment__image::after  ,
-    &.loading .comments__comment__info::after  ,
-    &.loading .comments__comment__info__name span::after  ,
-    &.loading .comments__comment__info__name p::after  ,
-    &.loading .comments__comment__createdAt::after  ,
-    &.loading .comments__current-user__input::after  ,
-    &.loading .emoij::after  ,
-    &.loading .comments__current-user__image::after,
-    &.loading .comments__current-user__send::after   {
-        @include skeleton-after;
-    }
-
   
 }
 

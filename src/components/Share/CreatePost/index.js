@@ -1,26 +1,30 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import { GrClose } from "react-icons/gr";
 //-my imports
 import "./create-post.scss";
 import CEmojiPicker from "../../CEmojiPicker";
 import { MdInsertEmoticon, MdLibraryAdd } from "react-icons/md";
-import ErrorMesssage from "../../ErrorMessage";
-
-
-
-const CreatePost = forwardRef(({setShowCreateShare} , ref ) => 
-{
-
+import httpsRequest from "../../../api/axios";
+import { useDispatch   } from "react-redux";
+import { addPost, getPosts  } from "../../../redux/actions/post";
+import { UserContext } from "../../../context/authContext";
+import Skeleton from "react-loading-skeleton";
+import { AiOutlineClose } from "react-icons/ai";
+let isFirstLoading = true;
+const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const [showEmoji, setShowEmoji] = useState(false);
-  const [value, setValue] = useState("");
+ 
+ const {currentUser} = useContext(UserContext);
+ const [skeleton, setSkeleton] = useState(true);
+  const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
+    const dispatch = useDispatch();
   const handleEmoijClick = (event, emoij) => {
-    setValue((prev) => prev + event.emoji);
+    setDesc((prev) => prev + event.emoji);
   };
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setDesc(e.target.value);
   };
-console.log(file);
   const emojiRef = useRef();
   useEffect(() => {
     function handleClickOutside(event) {
@@ -39,43 +43,106 @@ console.log(file);
   const handleClose = (e) => {
     setFile(null);
   };
+
+  const handleFile = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const { data } = await httpsRequest.post("/upload", formData);
+      return data.file;
+    } catch (e) {
+      console.log("Error", e);
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let image = ""
+    if(file) { image = await handleFile(file)};
+    dispatch(addPost({image,desc}))
+    setShowCreateShare(false);
+    setShowSpinner(true);
+    setTimeout(() => {
+      setShowSpinner(false);
+      setTimeout(() => {
+        dispatch(getPosts());
+      },(300))
+    },(3 * 1000))
+  };
+
+  useEffect(() => {
+      setTimeout(() => {
+        isFirstLoading  = false;
+        setSkeleton(false);
+      },(3 * 1000))
+  },[])
   return (
-    <div className="model-create" >
+    <div className="model-create">
       <div className="create-post" ref={ref}>
         <div className="create-post__header">
-          <h3>Tạo bài viết</h3>
-          <span className="create-post__header__close" onClick={() => setShowCreateShare(false)} >
-            <GrClose />
+            {skeleton && isFirstLoading ?  <div className="wrapper-skeleton">
+              <Skeleton />
+            </div>: <h3>Tạo bài viết</h3>} 
+          <span
+            className="create-post__header__close"
+            onClick={() => setShowCreateShare(false)}
+          >
+            <AiOutlineClose  />
           </span>
         </div>
         <div className="create-post__center">
           <div className="create-post__center__info">
-            <span className="create-post__center__info__avatar">
-              {" "}
-              <img src="/no-image.webp" alt="" />
-            </span>
-            <span className="create-post__center__info__name">Viết Tài <span>đang cảm thấy</span></span>
+          {skeleton && isFirstLoading ? 
+          <div className="skeleton-avatar">
+              <Skeleton />
+          </div>
+           : <span className="create-post__center__info__avatar">
+              <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/no-image.webp"} alt="" />
+            </span>} 
+            {skeleton && isFirstLoading ? 
+          <div className="skeleton-name">
+              <Skeleton  count={2}/>
+          </div>
+           :   <span className="create-post__center__info__name">
+             {currentUser.firstName + " "+currentUser.lastName} <span></span>
+            </span>} 
+          
           </div>
           <div className="create-post__center__search">
-            <input
-              value={value}
-              placeholder="Viết ơi,bạn đang nghĩ gì vậy"
+          {skeleton && isFirstLoading ? 
+          <div className="wrapper-skeleton">
+              <Skeleton  count={2}/>
+          </div>
+           :  <>
+           <input
+              value={desc}
+              autoFocus={true}
+              placeholder={`${currentUser.firstName} ơi,bạn đang nghĩ gì vậy`}
               onChange={handleChange}
             />
-             <span  className="emoij" >
-             <MdInsertEmoticon onClick={handleClick}/>
+              <span className="emoij">
+              <MdInsertEmoticon onClick={handleClick} />
 
-             {showEmoji && <CEmojiPicker
-              handleEmoijClick={handleEmoijClick}
-              ref={emojiRef}
-              handleClick={handleClick}
-            />}
-             </span>
-         
+              {showEmoji && (
+                <CEmojiPicker
+                  handleEmoijClick={handleEmoijClick}
+                  ref={emojiRef}
+                  handleClick={handleClick}
+                />
+              )}
+            </span>
+           </>
+            } 
+           
           
           </div>
           <div className="create-post__center__upload">
-            {!file && (
+
+          {skeleton && isFirstLoading ? 
+          <div className="wrapper-skeleton">
+              <Skeleton  count={2}/>
+          </div>
+           : <>
+           {!file && (
               <label
                 className="create-post__center__upload__wrap"
                 htmlFor="create-post-image"
@@ -108,14 +175,29 @@ console.log(file);
                 <img src={URL.createObjectURL(file)} alt="" />
               </div>
             )}
+           </>
+            } 
+           
           </div>
         </div>
-        <button disabled={file || value ? true :false} className={`create-post__submit ${file || value ? "":"disable"}`}>Đăng</button>
+        <button
+          onClick={handleSubmit}
+          disabled={file || desc ? false : true}
+          className={`create-post__submit ${file || desc ? "" : "disable"}`}
+        >
+         {skeleton && isFirstLoading ? 
+          <div className="wrapper-skeleton">
+              <Skeleton  count={2}/>
+          </div>
+           : <>
+           Đăng
+           </>
+            } 
+        </button>
       </div>
-
-      
+     
     </div>
   );
-})
+});
 
 export default CreatePost;

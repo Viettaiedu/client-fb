@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //-my imports
 import "./account.scss";
 import { routesPublic } from "../../../config/routes";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useContext, useState } from "react";
 import Futures from "../Futures";
 import {
   accountFutures,
@@ -12,22 +12,26 @@ import {
   heplerFutures,
   screenFutures,
 } from "../../../assets/futures";
+import { UserContext } from "../../../context/authContext";
+
 const AccountFuture = forwardRef(({ setShowAccountSetting }, ref) => {
   const [showFuturesAccount, setShowFuturesAccount] = useState(true);
   const [showFuturesSetting, setShowFuturesSetting] = useState(false);
   const [showFuturesHelper, setShowFuturesHelper] = useState(false);
   const [showFuturesDarkMode, setShowFuturesDarkMode] = useState(false);
+  const {currentUser} = useContext(UserContext);
+ 
   return (
     <div className="account" ref={ref}>
       {showFuturesAccount && (
         <>
           <Link
             onClick={() => setShowAccountSetting(false)}
-            to={routesPublic.profile + "/1"}
+            to={routesPublic.profile + "/" + currentUser.id}
             className="account__info"
           >
-            <img src="/no-image.webp" alt="no-image" />
-            <span className="account__info__name">Viết Tài</span>
+            <img src={currentUser.profilePic ?currentUser.profilePic :"/no-image.webp" } alt={currentUser.firstName} />
+            <span className="account__info__name">{currentUser.firstName +" "+currentUser.lastName }</span>
           </Link>
           <Futures
             fcShowFutures={{

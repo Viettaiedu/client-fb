@@ -1,41 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { BiSend } from "react-icons/bi";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { MdInsertEmoticon } from "react-icons/md";
 import CEmojiPicker from "../CEmojiPicker";
 import "./commnents.scss";
-function Commnents({ showCommnent }) {
+import Comment from "../Comment";
+import { UserContext } from "../../context/authContext";
+let isFirstLoading = true;
+function Commnents({ showCommnent  ,comments}) {
+  const [skeleton , setSkeleton] = useState(true);
+  const {currentUser} = useContext(UserContext);
+ 
   const [value, setValue] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const [loading ,setLoading] = useState(false);
-  const comments = [
-    {
-      id: "",
-      desc: "Hello",
-      userId: "",
-      postId: "",
-      profilePic: "/no-image.webp",
-      name: "Thủy Phan",
-      createdAt: "3 giờ",
-    },
-    {
-      id: "",
-      desc: "Hello",
-      userId: "",
-      postId: "",
-      profilePic: "/no-image.webp",
-      name: "Thủy Phan",
-      createdAt: "3 giờ",
-    },
-    {
-      id: "",
-      desc: "Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello ",
-      userId: "",
-      postId: "",
-      profilePic: "/no-image.webp",
-      name: "Thủy Phan",
-      createdAt: "3 giờ",
-    },
-  ];
+  
   const handleEmoijClick = (event, emoij) => {
     setValue((prev) => prev + event.emoji);
   };
@@ -64,37 +44,36 @@ function Commnents({ showCommnent }) {
       setLoading(false);
     },1000)
   },[showCommnent])
-
+  useEffect(() => {
+    setTimeout(() => {
+      setSkeleton(false);
+      isFirstLoading = false;
+  },(3* 1000))
+  },[])
  
   return (
     <div className={`comments ${loading ? "loading":""}`}>
       {comments.map((comment, index) => (
-        <div key={index} className="comments__comment">
-          <span className="comments__comment__image">
-            <img src={comment.profilePic} alt="" />
-          </span>
-          <span className="comments__comment__info">
-            <span className="comments__comment__info__name">
-              {comment.name}
-            </span>
-            <p>{comment.desc}</p>
-          </span>
-          <span className="comments__comment__createdAt">
-            {comment.createdAt}
-          </span>
-        </div>
+       <Comment comment={comment} key={index} />
       ))}
 
+
+
       <div className="comments__current-user">
+
+      {skeleton && isFirstLoading ?<div className="wrapper-skeleton">
+
+      <Skeleton  count={2}  />
+      </div> : <>
         <span className="comments__current-user__image">
-          <img alt="" src="/no-image.webp" />
+          <img alt={currentUser.firstName}  src={currentUser.profilePic ? currentUser.profilePic :"/no-image.webp"} />
         </span>
         <span className="comments__current-user__input">
           <input
             value={value}
             onChange={handleChange}
             type="text"
-            placeholder="Viết bình luận..."
+            placeholder={`${currentUser.firstName} bình luận...`}
           />
           <span className="emoij">
             <MdInsertEmoticon onClick={handleClick} />
@@ -110,6 +89,8 @@ function Commnents({ showCommnent }) {
         <button className="comments__current-user__send">
           <BiSend />
         </button>
+      </>}
+       
       </div>
     </div>
   );

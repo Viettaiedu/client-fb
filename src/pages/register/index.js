@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+// My imports
 import "./register.scss";
+import httpsRequest from "../../api/axios";
+import ModelSuccess from "../../components/ModelSuccess";
 function Register() {
   const [inputs, setInputs] = useState({
     firstname: "",
@@ -8,10 +12,13 @@ function Register() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
   const [errFirstName, setErrFirstName] = useState("");
   const [errLastName, setErrLastName] = useState("");
   const [errEmail, setErrEmail] = useState("");
   const [errPassword, setErrPassword] = useState("");
+  const [errSubmit, setErrSubmit] = useState(true);
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     e.target.style.border = "1px solid rgba(128, 128, 128, 0.679)";
@@ -19,6 +26,7 @@ function Register() {
     setErrLastName("");
     setErrEmail("");
     setErrPassword("");
+    setErrSubmit(false);
   };
 
   const handleBlur = (e) => {
@@ -27,11 +35,13 @@ function Register() {
         if (inputs[e.target.name]) break;
         setErrFirstName("Tên của bạn là gì");
         e.target.style.border = "1px solid red";
+        setErrSubmit(true);
         break;
       case "lastname":
         if (inputs[e.target.name]) break;
         setErrLastName("Họ của bạn là gì");
         e.target.style.border = "1px solid red";
+        setErrSubmit(true);
         break;
       case "email":
         const re =
@@ -40,7 +50,7 @@ function Register() {
         if (check) break;
         setErrEmail("Yêu cầu là phải là email");
         e.target.style.border = "1px solid red";
-
+        setErrSubmit(true);
         break;
       case "password":
         if (inputs[e.target.name].length >= 6) break;
@@ -48,12 +58,36 @@ function Register() {
           "Mật khẩu có tối thiểu 6 chữ số bao gồm số,chữ cái và dấu câu (như ! và & )"
         );
         e.target.style.border = "1px solid red";
+        setErrSubmit(true);
         break;
       default:
+        setErrSubmit(false);
         break;
     }
   };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(!inputs.email || inputs.password || !inputs.firstname || !inputs.lastname) {
+        if(!errSubmit) {
+          try {
+            const {data} = await httpsRequest.post('/auth/register', inputs)
+              if(data) {
+                setErrFirstName("")
+                setErrLastName("")
+                setErrEmail("")
+                setErrPassword("")
+                setShowSuccess(true);
+              }
+          }catch(e) {
+            const el = document.querySelector('.err-account');
+            el.textContent = e.response.data.message;
+          }
+        }
+    }
+  };
+  const handleClick = (e) => {
+    navigate('/login');
+  }
   return (
     <div className="wrapper">
       <div className="wrapper__logo">
@@ -121,12 +155,14 @@ function Register() {
               {errPassword && <span>{errPassword}</span>}
             </span>
           </div>
-          <button>Đăng ký</button>
+            <span className="err-account"></span>
+          <button onClick={handleSubmit}>Đăng ký</button>
         </form>
         <Link to="/login" className="register__to-login ">
-          Bạn đã có tài khoản ư? 
+          Bạn đã có tài khoản ư?
         </Link>
       </div>
+    {showSuccess &&   <ModelSuccess handleClick={handleClick} message="OK bạn đã đăng kí thành công rồi đó"/>}
     </div>
   );
 }

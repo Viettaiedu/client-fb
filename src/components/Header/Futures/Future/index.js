@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import httpsRequest from "../../../../api/axios";
 import { accountFutures, screenFutures } from "../../../../assets/futures";
+import { UserContext } from "../../../../context/authContext";
 import { DarkModeContext } from "../../../../context/darkModeContext";
+import Spinner from "../../../Spinner";
 function Future({ future, fcShowFutures, typeOther }) {
   const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
-  const handleSetFuture = (e) => {
+  const [showSpinner ,setShowSpinner] = useState(false);
+  const{logout} = useContext(UserContext);
+  const handleSetFuture = async (e) => {
       if(!e.target === document.querySelector('.account__futures__future')) return;
     switch (e.target.textContent.trim()) {
       case accountFutures[0].text.trim():
@@ -23,6 +28,19 @@ function Future({ future, fcShowFutures, typeOther }) {
             fcShowFutures.setShowFuturesAccount(false);
             fcShowFutures.setShowFuturesHelper(false);
             fcShowFutures.setShowFuturesSetting(false);
+            break;
+        case accountFutures[4].text.trim():
+              try {
+                setShowSpinner(true);
+                setTimeout(async () => {
+                  await httpsRequest.post('/auth/logout');
+                  logout();
+                },(4*1000));
+              }
+              catch(e) {
+                console.log("Error" ,e);
+              }
+
             break;
       default:
         alert("Chức năng này chưa có,quay trở lại thử chức năng khác nhé");
@@ -79,6 +97,7 @@ function Future({ future, fcShowFutures, typeOther }) {
           </div>
         </>
       )}
+     {showSpinner &&  <Spinner />}
     </>
   );
 }

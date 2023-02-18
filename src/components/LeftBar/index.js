@@ -1,15 +1,17 @@
 
 
 import {Link} from 'react-router-dom'
-import { useState } from 'react';
+import {  useContext, useState } from 'react';
 import { BsChevronCompactDown,BsChevronCompactUp } from 'react-icons/bs';
-
 
 //---My imports
 import './left-bar.scss';
 import {imagesLeftBar , imagesBottomLeftBar} from '../../assets/image-icons';
 import {routesPublic} from '../../config/routes';
+import { UserContext } from '../../context/authContext';
+
 function LeftBar() {
+    const {currentUser} = useContext(UserContext);
     const [items , setItems] = useState(imagesLeftBar.slice(0,5));
     const [itemsShortcuts , setItemsShortcuts] = useState(imagesBottomLeftBar.slice(0,5));
     const [showAdd , setShowAdd] = useState(true);
@@ -33,8 +35,8 @@ function LeftBar() {
     return (<div className='left-bar'>
             <div className="left-bar__items">
                     <Link to={routesPublic.profile+'/1'} className="left-bar__items__item">
-                        <img src="/no-image.webp" alt=""/>
-                        <span className="left-bar__items__item__name">Viết Tài</span>
+                        <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/no-image.webp"} alt={currentUser.firstName}/>
+                        <span className="left-bar__items__item__name">{currentUser.firstName +" "+currentUser.lastName }</span>
                     </Link>
                     {items.map((item ,index)=> (
                         <div key={index} className="left-bar__items__item">

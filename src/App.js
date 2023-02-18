@@ -16,11 +16,18 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import Register from "./pages/register";
 import Login from "./pages/login";
+import { UserContext } from "./context/authContext";
 function App() {
   const {darkMode} = useContext(DarkModeContext);
-  const currentUser = false;
+  const {currentUser} = useContext(UserContext);
   const ProtectedRoute = ({children}) => {
-    if(!currentUser) return <Navigate to="/register" replace/>
+    if(!currentUser ) return <Navigate to="/login" replace/>
+    return children;
+  }
+
+  const Protected = ({children}) => {
+    if(currentUser) return <Navigate to='/' />
+
     return children;
   }
   const router = createBrowserRouter([
@@ -39,13 +46,15 @@ function App() {
       <Create/>
       </ProtectedRoute>
     }
-    ,{ path: routesPublic.profile +"/:userId", element:
+    ,{ path: routesPublic.profile + "/:userId", element:
     <ProtectedRoute>
     <Profile/>
     </ProtectedRoute>
    }
-    ,{ path: "/login", element:<Login/> }
-    ,{ path: "/register", element:<Register/> }
+    ,{ path: "/login", element: <Protected><Login/> </Protected>}
+    ,{ path: "/register", element: <Protected>
+<Register/>
+    </Protected> }
   ]);
   return <div  className={`App theme-${darkMode?"dark":"light"}`}>
     <RouterProvider router={router}/>

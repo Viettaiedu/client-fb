@@ -4,12 +4,19 @@ import App from './App';
 import './style.scss';
 import reportWebVitals from './reportWebVitals';
 import { DarkModeContextProvider } from './context/darkModeContext';
+import {ProviderUserContext} from './context/authContext';
+import { store } from './redux/store';
+import { Provider } from 'react-redux'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <DarkModeContextProvider>
+  <Provider store={store}>
+  <ProviderUserContext>
   <React.StrictMode>
     <App />
   </React.StrictMode>
+  </ProviderUserContext>
+  </Provider>
   </DarkModeContextProvider>
 );
 
