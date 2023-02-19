@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import httpsRequest from "../../api/axios";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/Model/Spinner";
 import { UserContext } from "../../context/authContext";
 import "./login.scss";
 function Login() {

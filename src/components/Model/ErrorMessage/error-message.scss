@@ -1,6 +1,6 @@
-@use '../../scss/' as *;
+@use '../../../scss/' as *;
 
-.success-message {
+.error-message {
     @include themify($themes) {
         top:0;
         left: 0;
@@ -25,12 +25,7 @@
             font-size: 2rem;
             font-weight: 800;
             color:red;
-            animation: showSuccess 0.2s ease-in-out forwards;
-
-            span {
-                color:rgb(47, 255, 141);
-                @include flex-center;
-            }
+            animation: showError 0.2s ease-in-out forwards;
             button {
                 position: absolute;
                 top:20px;
@@ -38,7 +33,7 @@
                 transform: translateX(-50%);
                 padding: 10px 20px;
                 border-radius: 10px;
-                width: 80%;
+                width: 70%;
                 
                 cursor: pointer;
                 font-size: 1.8rem;
@@ -56,7 +51,7 @@
     }
 }
 
-@keyframes showSuccess {
+@keyframes showError {
     0% {
         transform: translateY(600px);
         opacity: 0;

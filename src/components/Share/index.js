@@ -6,10 +6,10 @@ import CreatePost from "./CreatePost";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useContext, useEffect, useRef, useState } from "react";
-import ErrorMesssage from "../ErrorMessage";
+import ErrorMesssage from "../Model/ErrorMessage";
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
-import Spinner from "../Spinner";
+import Spinner from "../Model/Spinner";
 import { UserContext } from "../../context/authContext";
 let isFirstLoading = true;
 function Share() {

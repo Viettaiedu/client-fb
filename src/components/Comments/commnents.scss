@@ -2,16 +2,32 @@
 
 .comments {
   @include themify($themes) {
-    padding: 10px;
+    padding: 0px 0px 0px 10px;
+   
     display: flex;
-    flex-direction: column-reverse;
     gap: 10px;
+    flex-direction: column;
     position: relative;
+    max-height: 43vh;
+    display: flex;
+    &__other-users {
+      overflow: auto;
+      max-height: 40vh;
+      @include webkit-bar;
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
     &__comment {
       display: flex;
       gap: 12px;
       position: relative;
         color:themed(textColor);
+        &__wrapper {
+          display: flex;
+          flex-direction: column;
+          gap:5px;
+        }
       &__image {
         width: 35px;
         height: 35px;
@@ -32,17 +48,50 @@
         display: flex;
         flex-direction: column;
         gap: 1;
+        background-color:themed(bgSoft);
+        width: 100%;
+        border-radius: 5px;
+        padding: 4px 10px;
         &__name {
-          font-weight: 600;
-         
+          font-weight: 500;
+          color:themed(textColor);
+          
         }
 
         p {
-          max-width: 529px;
-
-         
+         width: 100%;
+         word-wrap:break-word;
+         color:themed(textColor);
         }
       }
+     &__options {
+       display: flex;
+       align-items: center;
+       gap:20px;
+      &__delete {
+        color:themed(textColor);
+        padding: 6px;
+        transition: color 0.1s linear;
+        &:hover {
+          color:red;
+        }
+      }
+      &__edit {
+        color:themed(textColor);
+        padding: 6px;
+        position: relative;
+        cursor: default;
+        transition: color 0.1s linear;
+        &__model {
+          position:absolute;
+          left: 0;
+          right: 0;
+        }
+        &:hover {
+          color:red;
+        }
+      }
+     }
       &__createdAt {
         display: flex;
         align-items: center;
@@ -58,11 +107,13 @@
     &__current-user {
       display: flex;
       width: calc(100% - 20px);
-      bottom: 0px;
-      left: 10px;
-      gap: 10px;
+      position: sticky;
       align-items: center;
-
+      z-index: 99;
+      bottom:0;
+      left: 0;
+      gap:10px;
+      background-color: themed(bg);
       &__image {
           width: 35px;
           height: 35px;
@@ -83,7 +134,7 @@
         input {
           width: 100%;
           height: 100%;
-          padding: 10px;
+         padding: 10px 35px 10px 10px;
           outline: none;
           border: none;
           background-color: rgba(128, 128, 128, 0.2);

@@ -29,3 +29,27 @@ export const addComment =  (inputs) => async (dispatch) => {
         console.log("Error",e);
     }
 }
+export const deleteComment =  (id) => async (dispatch) => {
+    try {
+       await  httpsRequest.delete('/comments/'+id);
+       dispatch({
+        type:actionTypes.DELETE_COMMENT,
+        payload : {id:id}
+      })
+    }
+    catch(e) {
+        console.log("Error",e);
+    }
+}
+export const updateComment =  (desc,id) => async (dispatch) => {
+    try {
+        await  httpsRequest.put('/comments/' , {desc,id});
+       dispatch({
+        type:actionTypes.UPDATE_COMMENT,
+        payload : {desc,id}
+      })
+    }
+    catch(e) {
+        console.log("Error",e);
+    }
+}

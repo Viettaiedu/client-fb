@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 // My imports
 import "./register.scss";
 import httpsRequest from "../../api/axios";
-import ModelSuccess from "../../components/ModelSuccess";
+import ModelSuccess from "../../components/Model/Success";
 function Register() {
   const [inputs, setInputs] = useState({
     firstname: "",

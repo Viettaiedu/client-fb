@@ -9,19 +9,7 @@
     overflow-y: scroll;  
     z-index: 1; 
     position: sticky;
-    &::-webkit-scrollbar {
-        background-color: transparent;
-        width: 9px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(128, 128, 128, 0.61);
-        width: 9px;
-        border-radius: 20px;
-    }
-    &::-webkit-resizer {
-        resize: both;
-    }
+    @include webkit-bar;
     @include desktop {
         & {
             padding: 0px 10px 0px 20px;

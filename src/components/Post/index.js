@@ -177,6 +177,7 @@ function Post({ post }) {
               postId={post.id}
               comments={comments}
               showCommnent={showCommnent}
+              setShowComment={setShowComment}
             />
           )}
     </div>

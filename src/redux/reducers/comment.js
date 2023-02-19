@@ -26,6 +26,23 @@ export const commentsReducer = (state = initState, action) => {
                     ...state,
                     comments : [...state.comments , action.payload]
                 }
+                case actionTypes.DELETE_COMMENT :
+                    return {
+                        ...state,
+                        comments : [...state.comments.filter(comment => comment.id !== action.payload.id)]
+                    }
+                case actionTypes.UPDATE_COMMENT :
+                    const newItem = [];
+                    state.comments.forEach(comment =>  {
+                        if(comment.id === action.payload.id) {
+                            newItem.push(comment);
+                        }
+                    });
+                    newItem[0].desc = action.payload.desc || "";
+                    return {
+                        ...state,
+                        comments : [...state.comments.filter(comment => (comment.id !== action.payload.id)) ,...newItem ]
+                    }
             default :
             return state;
         }
