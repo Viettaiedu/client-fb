@@ -1,6 +1,10 @@
 import * as  actionTypes from '../constants/post'; 
-
-export const postsReducer = (state = {posts : []} , action) => {
+const initState = {
+    posts : null,
+    isLoading:true,
+    isError:true
+}
+export const postsReducer = (state = initState , action) => {
         switch(action.type) {
             case actionTypes.GET_POSTS_REQUEST :
                 return {
@@ -15,12 +19,18 @@ export const postsReducer = (state = {posts : []} , action) => {
             case actionTypes.GET_POSTS_FAIL :
                 return {
                     isError:true,
-                    posts:action.payload
                 }
                 case actionTypes.ADD_POST :
                 return {
                     ...state,
-                    posts : [...state.posts , action.payload]
+                    posts : [...state.posts, action.payload],
+                    isLoading:false
+                }
+                case actionTypes.DELETE_POST :
+                return {
+                    ...state,
+                    posts :[...state.posts.filter(post => post.id !== action.payload.id)],
+                    isLoading:false
                 }
             default :
             return state;

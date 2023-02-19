@@ -84,7 +84,7 @@ function Create() {
               src={
                 currentUser.profilePic
                   ? "/uploads/"+currentUser.profilePic
-                  : "/no-image.webp"
+                  : "/uploads/no-image.webp"
               }
               alt=""
             />}

@@ -20,9 +20,24 @@ export const getPosts =  () => async (dispatch) => {
 export const addPost =  (inputs) => async (dispatch) => {
     try {
         const { data } = await  httpsRequest.post('/posts',inputs);
+        console.log(data);
        dispatch({
         type:actionTypes.ADD_POST,
         payload : data
+      })
+    }
+    catch(e) {
+        console.log("Error",e);
+    }
+}
+export const deletePost =  (postId) => async (dispatch) => {
+    try {
+         await  httpsRequest.delete('/posts/'+postId);
+       dispatch({
+        type:actionTypes.DELETE_POST,
+        payload: {
+            id : postId
+        }
       })
     }
     catch(e) {

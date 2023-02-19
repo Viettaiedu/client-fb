@@ -130,7 +130,7 @@ function HeaderRight({isHideMessage}) {
       <TextHover text={"Tài khoản"} />
       <img
         className="header__right__one__avatar"
-        src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/no-image.webp"  }
+        src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/uploads/no-image.webp"  }
         alt={currentUser.name}
         onClick={() => setShowAccountSetting(!showAccountSetting)}
       />

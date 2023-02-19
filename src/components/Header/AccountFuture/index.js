@@ -30,7 +30,7 @@ const AccountFuture = forwardRef(({ setShowAccountSetting }, ref) => {
             to={routesPublic.profile + "/" + currentUser.id}
             className="account__info"
           >
-            <img src={currentUser.profilePic ?currentUser.profilePic :"/no-image.webp" } alt={currentUser.firstName} />
+            <img src={currentUser.profilePic ?currentUser.profilePic :"/uploads/no-image.webp" } alt={currentUser.firstName} />
             <span className="account__info__name">{currentUser.firstName +" "+currentUser.lastName }</span>
           </Link>
           <Futures

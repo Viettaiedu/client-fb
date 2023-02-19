@@ -6,14 +6,13 @@ import CEmojiPicker from "../../CEmojiPicker";
 import { MdInsertEmoticon, MdLibraryAdd } from "react-icons/md";
 import httpsRequest from "../../../api/axios";
 import { useDispatch   } from "react-redux";
-import { addPost, getPosts  } from "../../../redux/actions/post";
+import { addPost  } from "../../../redux/actions/post";
 import { UserContext } from "../../../context/authContext";
 import Skeleton from "react-loading-skeleton";
 import { AiOutlineClose } from "react-icons/ai";
 let isFirstLoading = true;
 const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const [showEmoji, setShowEmoji] = useState(false);
- 
  const {currentUser} = useContext(UserContext);
  const [skeleton, setSkeleton] = useState(true);
   const [desc, setDesc] = useState("");
@@ -22,6 +21,7 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const handleEmoijClick = (event, emoij) => {
     setDesc((prev) => prev + event.emoji);
   };
+  
   const handleChange = (e) => {
     setDesc(e.target.value);
   };
@@ -43,7 +43,6 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const handleClose = (e) => {
     setFile(null);
   };
-
   const handleFile = async (file) => {
     try {
       const formData = new FormData();
@@ -56,19 +55,17 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let image = ""
+    let image = "/no-background.png";
     if(file) { image = await handleFile(file)};
-    dispatch(addPost({image,desc}))
     setShowCreateShare(false);
     setShowSpinner(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setShowSpinner(false);
+     await dispatch(addPost({image,desc}))
       setTimeout(() => {
-        dispatch(getPosts());
       },(300))
     },(3 * 1000))
   };
-
   useEffect(() => {
       setTimeout(() => {
         isFirstLoading  = false;
@@ -96,7 +93,7 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
               <Skeleton />
           </div>
            : <span className="create-post__center__info__avatar">
-              <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/no-image.webp"} alt="" />
+              <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/uploads/no-image.webp"} alt="" />
             </span>} 
             {skeleton && isFirstLoading ? 
           <div className="skeleton-name">

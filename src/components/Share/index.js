@@ -55,7 +55,7 @@ function Share() {
     <div className="share">
       <div className="share__top">
         <Link to={routesPublic.profile+"/"+currentUser.id} className="share__top__avatar">
-          {skeleton && isFirstLoading? <Skeleton className="avatar"/> :  <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/no-image.webp"} alt={currentUser.firstName}  />}
+          {skeleton && isFirstLoading? <Skeleton className="avatar"/> :  <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/uploads/no-image.webp"} alt={currentUser.firstName}  />}
         </Link>
 
         <div className="share__top__search">

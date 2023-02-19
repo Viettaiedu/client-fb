@@ -35,7 +35,7 @@ function LeftBar() {
     return (<div className='left-bar'>
             <div className="left-bar__items">
                     <Link to={routesPublic.profile+'/1'} className="left-bar__items__item">
-                        <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/no-image.webp"} alt={currentUser.firstName}/>
+                        <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/uploads/no-image.webp"} alt={currentUser.firstName}/>
                         <span className="left-bar__items__item__name">{currentUser.firstName +" "+currentUser.lastName }</span>
                     </Link>
                     {items.map((item ,index)=> (

@@ -135,7 +135,7 @@ function Stories() {
                     <div className="stories__story__current-user"></div>
                     <div
                       className="stories__story__up-story"
-                      style={{ backgroundImage: "url('/no-image.wepb')" }}
+                      style={{ backgroundImage: "url('/uploads/no-image.wepb')" }}
                     ></div>
                     <div className="stories__story__icon">
                       <GrAddCircle />
@@ -191,7 +191,7 @@ function Stories() {
                     <div className="stories__story__current-user"></div>
                     <div
                       className="stories__story__up-story"
-                      style={{ backgroundImage: "url('/no-image.wepb')" }}
+                      style={{ backgroundImage: "url('/uploads/no-image.wepb')" }}
                     ></div>
                     <div className="stories__story__icon">
                       <GrAddCircle />
