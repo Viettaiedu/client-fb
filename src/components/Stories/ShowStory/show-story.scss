@@ -14,7 +14,7 @@
             -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
             height: 100vh;
-
+            color:themed(textColor);
             @include desktop {
                 display:none;
             }
@@ -232,6 +232,8 @@
                     width: 100%;
                     height: 100%;
                     position: relative;
+                    border-radius: 10px;
+                    overflow: hidden;
                     &__duration {
                         width: calc(100% - 20px);
                         margin: 0px 10px;

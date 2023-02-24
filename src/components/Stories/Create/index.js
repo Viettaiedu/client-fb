@@ -140,6 +140,9 @@ function Create() {
           ) :  <HeaderRight isHideMessage={true} />}
         
       </div>
+     {skeleton && isFirstLoading ?<Skeleton /> :   <Link to={routesPublic.home}  className="stories-create__back" > 
+      <img src='/logo.png' alt='facebook'/>
+      </Link>}
     </div>
   );
 }

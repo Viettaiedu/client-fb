@@ -1,7 +1,7 @@
 import {  useEffect, useRef, useState } from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
-import { GoMute } from "react-icons/go";
+import { GoMute, GoUnmute } from "react-icons/go";
 import StoryProgress from "../StoryProgress";
 import moment from "moment";
 function Video({story ,idShow   }) {
@@ -36,7 +36,7 @@ function Video({story ,idShow   }) {
             <span>
           <span onClick={handlePlay}>{isPlaying  ? <FaPlay className="play"/> :   <FaPause className="pause"/>}</span> 
             <span  className="controls-mute show-pause">
-             <GoMute />
+             <GoUnmute />
             </span>
               <FiMoreHorizontal/>
             </span>

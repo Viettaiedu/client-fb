@@ -21,7 +21,6 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const handleEmoijClick = (event, emoij) => {
     setDesc((prev) => prev + event.emoji);
   };
-  
   const handleChange = (e) => {
     setDesc(e.target.value);
   };

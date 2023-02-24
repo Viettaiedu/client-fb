@@ -1,16 +1,15 @@
 import Video from "../Video";
 
-import { Navigation, Pagination , Autoplay, Thumbs  } from "swiper";
+import { Navigation, Pagination  } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/navigation";
 function Videos({ stories ,idShow ,handleChangeSlide ,thumbsSwiper }) {
     
   return (
     <Swiper
-    spaceBetween={50}
+    direction={"vertical"}
     grabCursor={true}
     slidesPerView={1}
     thums={{swiper : thumbsSwiper }}

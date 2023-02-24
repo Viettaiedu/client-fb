@@ -75,7 +75,6 @@ function ShowStory() {
             slidesPerView={4}
             watchSlidesProgress={true}
             activeIndex={idShow}
-              autoplay
               onSlideChange={handleChangeSlide}
         className="show-story__left__all-stories"
         >
