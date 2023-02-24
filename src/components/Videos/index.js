@@ -6,9 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import { useEffect, useState } from "react";
-import {FreeMode} from 'swiper';
 function Videos({ stories ,idShow ,handleChangeSlide ,thumbsSwiper }) {
     
   return (
@@ -17,13 +14,12 @@ function Videos({ stories ,idShow ,handleChangeSlide ,thumbsSwiper }) {
     grabCursor={true}
     slidesPerView={1}
     thums={{swiper : thumbsSwiper }}
-    modules={[Navigation, Pagination,Autoplay ,FreeMode,Thumbs]}
+    modules={[Navigation, Pagination]}
     activeIndex={idShow}
     navigation = {{
       nextEl :  '.swiper-button-next',
       prevEl : '.swiper-button-prev',
     }}
-    autoplay
     scrollbar={{ draggable: true }}
     onSlideChange={handleChangeSlide}
     className='show-story__right__videos'
