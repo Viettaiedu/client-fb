@@ -1,6 +1,6 @@
 import * as  actionTypes from '../constants/comment'; 
 const initState = {
-    comments : null,
+    comments : [],
     isLoading:true,
     isError:true
 }

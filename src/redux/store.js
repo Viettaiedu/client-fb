@@ -2,6 +2,7 @@ import {legacy_createStore , combineReducers , applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools} from 'redux-devtools-extension';
 import {postsReducer} from './reducers/post';
+import {storiesReducer} from './reducers/story';
 import {likesReducer} from './reducers/like';
 import {commentsReducer} from './reducers/comment';
 import Raven from 'raven-js';
@@ -22,7 +23,8 @@ const crashReporter = store => next => action => {
 const reducer = combineReducers({
     posts:postsReducer,
     comments:commentsReducer,
-    likes:likesReducer
+    likes:likesReducer,
+    stories:storiesReducer
 });
 const middleware = [thunk];
 export const store = legacy_createStore(

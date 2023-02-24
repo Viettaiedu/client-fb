@@ -169,7 +169,8 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
             </div>
             {file && (
               <div className="create-post__center__upload__file-image">
-                <img src={URL.createObjectURL(file)} alt="" />
+              {file.name.endsWith('.mov') || file.name.endsWith('.mp4') ?<video playsInline controls src={URL.createObjectURL(file)} alt="" /> : <img src={URL.createObjectURL(file)} alt="" />}
+                
               </div>
             )}
            </>

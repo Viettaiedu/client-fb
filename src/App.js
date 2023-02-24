@@ -17,6 +17,7 @@ import { DarkModeContext } from "./context/darkModeContext";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import { UserContext } from "./context/authContext";
+import ShowStory from "./components/Stories/ShowStory";
 function App() {
   const {darkMode} = useContext(DarkModeContext);
   const {currentUser} = useContext(UserContext);
@@ -49,6 +50,11 @@ function App() {
     ,{ path: routesPublic.profile + "/:userId", element:
     <ProtectedRoute>
     <Profile/>
+    </ProtectedRoute>
+   }
+    ,{ path: routesPublic.storiesShow, element:
+    <ProtectedRoute>
+    <ShowStory/>
     </ProtectedRoute>
    }
     ,{ path: "/login", element: <Protected><Login/> </Protected>}

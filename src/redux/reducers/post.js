@@ -1,6 +1,6 @@
 import * as  actionTypes from '../constants/post'; 
 const initState = {
-    posts : null,
+    posts : [],
     isLoading:true,
     isError:true
 }

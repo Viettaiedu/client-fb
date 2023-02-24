@@ -3,11 +3,12 @@ import { BsFillPlayFill } from "react-icons/bs";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Link } from "react-router-dom";
+import { routesPublic } from "../../config/routes";
 import "./story.scss";
 let isFirstLoading = true;
 function Story({ story, reels }) {
   const [skeleton, setSkeleton] = useState(true);
-
   useEffect(() => {
    setTimeout(() => {
      setSkeleton(false)
@@ -17,17 +18,22 @@ function Story({ story, reels }) {
   return (
     <div className="stories__story">
     {skeleton && isFirstLoading ? <Skeleton className="wrapper-skeleton" borderRadius={"10px"}/> : 
-    <div
+    <Link to={routesPublic.storiesShow}>
+    <video
         className="stories__story__image-story"
-        style={{ backgroundImage: `url('${story.imageStory}')` }}
-      ></div>
+        src={"/uploads/"+story.video}
+        alt=""
+      />
+    </Link>
     }
       {!reels && (
+        <Link to={routesPublic.profile +"/"+story.userId}>
         <img
           className="stories__story__profile-pic"
-          src={story.profilePic}
+          src={"/uploads/"+story.profilePic}
           alt=""
         />
+        </Link>
       )}
       <span className="stories__story__name">
         {reels ? (
@@ -36,7 +42,7 @@ function Story({ story, reels }) {
             {story.views} triệu
           </span>
         ) : (
-          story.name
+          story.firstName + " "+story.lastName
         )}
       </span>
     </div>

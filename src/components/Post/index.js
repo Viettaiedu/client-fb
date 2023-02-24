@@ -128,7 +128,8 @@ function Post({ post }) {
           <Skeleton className="post__body__image" count={1} />
         ) : (
           <span className="post__body__image">
-            <img src={"/uploads/" + post.image} alt={post.fistName} />
+            {post.image.endsWith('.mov') || post.image.endsWith('.mp4') ?  <video playsInline  controls src={"/uploads/"+post.image} alt={post.fistName} />: <img src={"/uploads/" + post.image} alt={post.fistName} />}
+           
           </span>
         )}
       </div>

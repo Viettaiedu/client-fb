@@ -1,6 +1,6 @@
 import * as  actionTypes from '../constants/like'; 
 const initState = {
-    likes : null,
+    likes : [],
     isLoading:true,
     isError:true
 }

@@ -13,23 +13,32 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Story from "../Story";
 import "./stories.scss";
 import { useContext, useEffect, useRef, useState } from "react";
-import {stories,stories2 } from '../../assets/data-stories';
+import {stories2 } from '../../assets/data-stories';
 import { routesPublic } from "../../config/routes";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/authContext";
+import {useDispatch , useSelector} from 'react-redux';
+import { getStories } from "../../redux/actions/story";
+
 let isFirstLoading = true;
 function Stories() {
   const navigationNextRef = useRef(null);
   const navigationPrevRef = useRef(null);
   const [skeleton, setSkeleton] = useState(true);
   const {currentUser} = useContext(UserContext);
+  const profilePic = "/uploads/"+currentUser.profilePic;
+  const storiesRe = useSelector(state => state.stories);
+    const {stories} = storiesRe;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStories());
+  },[dispatch])
   useEffect(() => {
     setTimeout(() => {
       setSkeleton(false)
       isFirstLoading = false;
     },(4 * 1000))
   },[])
-  console.log()
     const handleStories = (e) => {
       if(skeleton) return;
         const items = document.querySelectorAll('.stories-menu__item');
@@ -122,7 +131,7 @@ function Stories() {
         >
           {stories.map((story, index) => (
             <>
-              {story.current ? (
+              {index === 0 ? (
                 <SwiperSlide key={index}>
                 {skeleton && isFirstLoading ? <Skeleton style={{
                   width:"110px",
@@ -132,10 +141,10 @@ function Stories() {
                 
                 <Link to={routesPublic.storiesCreate} className="stories__story">
                     <div className="stories__story__image-story" style={{backgroundImage:`url(${currentUser.profilePic})`}}></div>
-                    <div className="stories__story__current-user"></div>
+                    <div className="stories__story__current-user" style={{backgroundImage: `url(${profilePic})`}}></div>
                     <div
                       className="stories__story__up-story"
-                      style={{ backgroundImage: "url('/uploads/no-image.wepb')" }}
+                      
                     ></div>
                     <div className="stories__story__icon">
                       <GrAddCircle />

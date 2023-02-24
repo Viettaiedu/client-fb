@@ -41,6 +41,10 @@ box-shadow: 0px 0px 32px -8px rgba(0,0,0,0.92);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    &__current-user {
+      background-repeat: no-repeat;
+     background-size: cover;
+    }
     &__image-story {
      width: 100%;
      height: 100%;
@@ -51,6 +55,8 @@ box-shadow: 0px 0px 32px -8px rgba(0,0,0,0.92);
      &:hover {
         transform: scale(1.04);
     }
+
+   
     }
   
       img {

@@ -1,7 +1,6 @@
 import moment from "moment";
 import {TfiClose} from 'react-icons/tfi';
-import {GoKebabHorizontal} from 'react-icons/go';
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
@@ -60,11 +59,15 @@ function Comment({ comment, postId }) {
 </span>
 {comment.userId === currentUser.id && 
            <>
-           <div className="comments__comment__options"> 
+           {skeleton && isFirstLoading ? <div className="skeleton-name">
+             <Skeleton />
+           </div>:
+            <div className="comments__comment__options"> 
            <span className="comments__comment__options__edit" onClick={() => setShowEditComment(true)}>Chỉnh sửa
            </span>
           <span className="comments__comment__options__delete" onClick={() => dispatch(deleteComment(comment.id))}><TfiClose/></span>
           </div>
+           }
            </>}  
               </div>
            

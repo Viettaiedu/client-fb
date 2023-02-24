@@ -26,6 +26,7 @@ const EditComment = ({ desc, id , setShowEditComment }) => {
     setTimeout(async  () => {
       await dispatch(updateComment(value,id));
       setShowSpinner(false);
+      setShowEditComment(false);
     },(2 * 1000))
   }
   useEffect(() => {
