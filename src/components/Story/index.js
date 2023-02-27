@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
 import "./story.scss";
@@ -17,7 +16,7 @@ function Story({ story, reels }) {
  },[])
   return (
     <div className="stories__story">
-    {skeleton && isFirstLoading ? <Skeleton className="wrapper-skeleton" borderRadius={"10px"}/> : 
+   
     <Link to={routesPublic.storiesShow}>
     <video
         className="stories__story__image-story"
@@ -25,7 +24,7 @@ function Story({ story, reels }) {
         alt=""
       />
     </Link>
-    }
+   
       {!reels && (
         <Link to={routesPublic.profile +"/"+story.userId}>
         <img

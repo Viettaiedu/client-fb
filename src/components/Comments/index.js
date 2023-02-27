@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { BiSend } from "react-icons/bi";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
 import { MdInsertEmoticon } from "react-icons/md";
 import CEmojiPicker from "../CEmojiPicker";
 import "./commnents.scss";
@@ -9,8 +8,9 @@ import Comment from "../Comment";
 import { UserContext } from "../../context/authContext";
 import { useDispatch } from "react-redux";
 import { addComment } from "../../redux/actions/comment";
+import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;
-function Commnents({ setShowComment,showCommnent, comments, postId }) {
+function Commnents({ setShowComment, showCommnent, comments, postId }) {
   const [skeleton, setSkeleton] = useState(true);
   const { currentUser } = useContext(UserContext);
   const dispatch = useDispatch();
@@ -77,13 +77,11 @@ function Commnents({ setShowComment,showCommnent, comments, postId }) {
       </div>
 
       <div className="comments__current-user">
-        {skeleton && isFirstLoading ? (
-          <div className="wrapper-skeleton">
-            <Skeleton count={2} />
-          </div>
-        ) : (
-          <>
-            <span className="comments__current-user__image">
+        <>
+          <span className="comments__current-user__image">
+            {skeleton && isFirstLoading ? (
+              <LoadingSkeleton circle />
+            ) : (
               <img
                 alt={currentUser.firstName}
                 src={
@@ -92,8 +90,12 @@ function Commnents({ setShowComment,showCommnent, comments, postId }) {
                     : "/uploads/no-image.webp"
                 }
               />
-            </span>
-            <span className="comments__current-user__input">
+            )}
+          </span>
+          <span className="comments__current-user__input">
+            {skeleton && isFirstLoading ? (
+              <LoadingSkeleton height={50} />
+            ) : (
               <input
                 value={value}
                 onChange={handleChange}
@@ -103,25 +105,31 @@ function Commnents({ setShowComment,showCommnent, comments, postId }) {
                 type="text"
                 placeholder={`${currentUser.firstName} bình luận...`}
               />
+            )}
+
+            {skeleton && isFirstLoading ? (
+              <LoadingSkeleton />
+            ) : (
               <span className="emoij">
                 <MdInsertEmoticon onClick={handleClick} />
-                {showEmoji && (
-                  <CEmojiPicker
-                    handleEmoijClick={handleEmoijClick}
-                    ref={emojiRef}
-                    handleClick={handleClick}
-                  />
-                )}
+                
               </span>
-            </span>
-            <button
-              className="comments__current-user__send"
-              onClick={handleSend}
-            >
-              <BiSend />
-            </button>
-          </>
-        )}
+            )}
+            {showEmoji && (
+              <CEmojiPicker
+                handleEmoijClick={handleEmoijClick}
+                ref={emojiRef}
+                handleClick={handleClick}
+              />
+            )}
+          </span>
+         
+          {skeleton && isFirstLoading  ? <LoadingSkeleton height={40}/>: 
+          
+          <button className="comments__current-user__send" onClick={handleSend}><BiSend /></button> }
+           
+          
+        </>
       </div>
     </div>
   );

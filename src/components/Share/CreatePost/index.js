@@ -8,7 +8,7 @@ import httpsRequest from "../../../api/axios";
 import { useDispatch   } from "react-redux";
 import { addPost  } from "../../../redux/actions/post";
 import { UserContext } from "../../../context/authContext";
-import Skeleton from "react-loading-skeleton";
+
 import { AiOutlineClose } from "react-icons/ai";
 let isFirstLoading = true;
 const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
@@ -75,9 +75,7 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
     <div className="model-create">
       <div className="create-post" ref={ref}>
         <div className="create-post__header">
-            {skeleton && isFirstLoading ?  <div className="wrapper-skeleton">
-              <Skeleton />
-            </div>: <h3>Tạo bài viết</h3>} 
+            <h3>Tạo bài viết</h3>
           <span
             className="create-post__header__close"
             onClick={() => setShowCreateShare(false)}
@@ -87,28 +85,16 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
         </div>
         <div className="create-post__center">
           <div className="create-post__center__info">
-          {skeleton && isFirstLoading ? 
-          <div className="skeleton-avatar">
-              <Skeleton />
-          </div>
-           : <span className="create-post__center__info__avatar">
+         <span className="create-post__center__info__avatar">
               <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/uploads/no-image.webp"} alt="" />
-            </span>} 
-            {skeleton && isFirstLoading ? 
-          <div className="skeleton-name">
-              <Skeleton  count={2}/>
-          </div>
-           :   <span className="create-post__center__info__name">
+            </span>
+          <span className="create-post__center__info__name">
              {currentUser.firstName + " "+currentUser.lastName} <span></span>
-            </span>} 
+            </span>
           
           </div>
           <div className="create-post__center__search">
-          {skeleton && isFirstLoading ? 
-          <div className="wrapper-skeleton">
-              <Skeleton  count={2}/>
-          </div>
-           :  <>
+          <>
            <input
               value={desc}
               autoFocus={true}
@@ -127,17 +113,12 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
               )}
             </span>
            </>
-            } 
            
           
           </div>
           <div className="create-post__center__upload">
 
-          {skeleton && isFirstLoading ? 
-          <div className="wrapper-skeleton">
-              <Skeleton  count={2}/>
-          </div>
-           : <>
+          <>
            {!file && (
               <label
                 className="create-post__center__upload__wrap"
@@ -173,7 +154,6 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
               </div>
             )}
            </>
-            } 
            
           </div>
         </div>
@@ -182,14 +162,9 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
           disabled={file || desc ? false : true}
           className={`create-post__submit ${file || desc ? "" : "disable"}`}
         >
-         {skeleton && isFirstLoading ? 
-          <div className="wrapper-skeleton">
-              <Skeleton  count={2}/>
-          </div>
-           : <>
+          <>
            Đăng
            </>
-            } 
         </button>
       </div>
      

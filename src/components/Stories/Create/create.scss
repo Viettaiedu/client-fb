@@ -113,6 +113,24 @@
             align-items: center;
             justify-content: center;
             gap:14px;
+            &__box {
+                -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+                background-color: themed(bgSoft);
+                width: 70%;
+                display: flex;
+                padding: 20px;
+                &__title {
+                    font-size: 1.6rem;
+                    font-weight: 300;
+                }
+
+                &__background {
+                    background-color: black;
+                    width: 100%;
+                }
+            }
             &__create {
                 height: 328px;
                 width: 217px;
@@ -210,7 +228,7 @@
             left: 10px;
             width: 45px;
             height: 45px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             border-radius: 50%;

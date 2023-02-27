@@ -1,18 +1,17 @@
 import moment from "moment";
-import {TfiClose} from 'react-icons/tfi';
+import { TfiClose } from "react-icons/tfi";
 import { useContext, useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
-import {deleteComment} from '../../redux/actions/comment';
+import { deleteComment } from "../../redux/actions/comment";
 import { UserContext } from "../../context/authContext";
 import EditComment from "../Model/EditComment";
+import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;
 function Comment({ comment, postId }) {
   const [skeleton, setSkeleton] = useState(true);
   const [showEditComment, setShowEditComment] = useState(false);
-  const {currentUser} = useContext(UserContext);
-  
+  const { currentUser } = useContext(UserContext);
+
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
@@ -28,62 +27,79 @@ function Comment({ comment, postId }) {
       ) : (
         <div>
           <div className="comments__comment">
-            {skeleton && isFirstLoading ? (
-              <div className="skeleton-avatar">
-                <Skeleton />
-              </div>
-            ) : (
-              <span className="comments__comment__image">
+            <span className="comments__comment__image">
+              {skeleton && isFirstLoading ? (
+                <LoadingSkeleton circle />
+              ) : (
                 <img src={"/uploads/" + comment.profilePic} alt="" />
-              </span>
-            )}
-              <div className="comments__comment__wrapper">
-              <span className="comments__comment__info">
+              )}
+            </span>
 
-{skeleton && isFirstLoading ? (
-  <div className="skeleton-name">
-    <Skeleton />
-  </div>
-) : (
-  <span className="comments__comment__info__name">
-    {comment.firstName + " " + comment.lastName}
-  </span>
-)}
-{skeleton && isFirstLoading ? (
-  <div className="skeleton-desc">
-    <Skeleton />
-  </div>
-) : (
-  <p>{comment.desc}</p>
-)}
-</span>
-{comment.userId === currentUser.id && 
-           <>
-           {skeleton && isFirstLoading ? <div className="skeleton-name">
-             <Skeleton />
-           </div>:
-            <div className="comments__comment__options"> 
-           <span className="comments__comment__options__edit" onClick={() => setShowEditComment(true)}>Chỉnh sửa
-           </span>
-          <span className="comments__comment__options__delete" onClick={() => dispatch(deleteComment(comment.id))}><TfiClose/></span>
-          </div>
-           }
-           </>}  
-              </div>
-           
-              
-         
-            {skeleton && isFirstLoading ? (
-              <div className="skeleton-time">
-                <Skeleton />
-              </div>
-            ) : (
-              <span className="comments__comment__createdAt">
-                {moment(comment.createdAt).fromNow("mm")}
+            <div className="comments__comment__wrapper">
+              <span className="comments__comment__info">
+                <span className="comments__comment__info__name">
+                  {skeleton && isFirstLoading ? (
+                    <LoadingSkeleton />
+                  ) : (
+                    comment.firstName + " " + comment.lastName
+                  )}
+                </span>
+                  <p>
+                {skeleton && isFirstLoading ? (
+                  <LoadingSkeleton width={100} />
+                ) : (
+                  
+                  comment.desc
+                  
+                  
+                  
+                )}
+                  </p>
               </span>
-            )}
+              {comment.userId === currentUser.id && (
+                <>
+                  <div className="comments__comment__options">
+                    <span
+                      className="comments__comment__options__edit"
+                      onClick={() => setShowEditComment(true)}
+                    >
+                      {skeleton && isFirstLoading ? (
+                        <LoadingSkeleton />
+                      ) : (
+                        <>Chỉnh sửa</>
+                      )}
+                    </span>
+                    <span
+                      className="comments__comment__options__delete"
+                      onClick={() => dispatch(deleteComment(comment.id))}
+                    >
+                      {skeleton && isFirstLoading ? (
+                        <LoadingSkeleton />
+                      ) : (
+                        <TfiClose />
+                      )}
+                    </span>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <span className="comments__comment__createdAt">
+            {skeleton && isFirstLoading ? (
+                        <LoadingSkeleton width={30} height={20}/>
+                      ) : (
+                        moment(comment.createdAt).fromNow("mm")
+                      )}
+            
+            </span>
           </div>
-      {showEditComment &&  <EditComment id={comment.id} setShowEditComment={setShowEditComment}  desc={comment.desc}/>} 
+          {showEditComment && (
+            <EditComment
+              id={comment.id}
+              setShowEditComment={setShowEditComment}
+              desc={comment.desc}
+            />
+          )}
         </div>
       )}
     </>

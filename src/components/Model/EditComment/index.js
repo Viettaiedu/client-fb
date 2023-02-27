@@ -1,34 +1,33 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { UserContext } from "../../../context/authContext";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import "./edit-comment.scss";
-import Skeleton from "react-loading-skeleton";
-import {updateComment} from '../../../redux/actions/comment';
-import Spinner from '../Spinner';
+import { updateComment } from "../../../redux/actions/comment";
+import Spinner from "../Spinner";
 let isFirstLoading = true;
-const EditComment = ({ desc, id , setShowEditComment }) => {
+const EditComment = ({ desc, id, setShowEditComment }) => {
   const { currentUser } = useContext(UserContext);
   const [skeleton, setSkeleton] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
   const [value, setValue] = useState(desc);
   const editRef = useRef();
   const dispatch = useDispatch();
-  useEffect(() => {
-        setTimeout(() => {
-            setSkeleton(false);
-            isFirstLoading = false;
-        },(3 * 1000))
-  },[])
-  const handleUpdate  = async () => {
-    if(desc.trim() === value.trim()) return;
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSkeleton(false);
+  //     isFirstLoading = false;
+  //   }, 3 * 1000);
+  // }, []);
+  const handleUpdate = async () => {
+    if (desc.trim() === value.trim()) return;
     setShowSpinner(true);
-    setTimeout(async  () => {
-      await dispatch(updateComment(value,id));
+    setTimeout(async () => {
+      await dispatch(updateComment(value, id));
       setShowSpinner(false);
       setShowEditComment(false);
-    },(2 * 1000))
-  }
+    }, 2 * 1000);
+  };
   useEffect(() => {
     function handleClickOutsideAccount(e) {
       if (editRef.current && !editRef.current.contains(e.target)) {
@@ -42,11 +41,10 @@ const EditComment = ({ desc, id , setShowEditComment }) => {
   }, [editRef]);
   return (
     <div className="edit-comment">
-    {isFirstLoading && skeleton ? <Skeleton /> : 
-    <span ref={editRef}>
+      <span ref={editRef}>
         <div className="edit-comment__wrap">
           <div className="edit-comment__wrap__avatar">
-          <img src={"/uploads/" + currentUser.profilePic} alt="" />
+            <img src={"/uploads/" + currentUser.profilePic} alt="" />
           </div>
           <div className="edit-comment__wrap__info">
             <div className="edit-comment__wrap__info__name">
@@ -64,14 +62,16 @@ const EditComment = ({ desc, id , setShowEditComment }) => {
             <button onClick={handleUpdate}>Cập nhật</button>
           </div>
         </div>
-        <div className="edit-comment__close" onClick={() => setShowEditComment(false)}>
-                <AiFillCloseCircle/>
-            </div>
+        <div
+          className="edit-comment__close"
+          onClick={() => setShowEditComment(false)}
+        >
+          <AiFillCloseCircle />
+        </div>
       </span>
-    }
-  {showSpinner && <Spinner />} 
+      {showSpinner && <Spinner />}
     </div>
-  )};
-
+  );
+};
 
 export default EditComment;

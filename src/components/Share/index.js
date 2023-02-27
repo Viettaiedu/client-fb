@@ -3,14 +3,15 @@ import img1 from "../../assets/share-icons/1.png";
 import img2 from "../../assets/share-icons/2.png";
 import img3 from "../../assets/share-icons/3.png";
 import CreatePost from "./CreatePost";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
+
 import { useContext, useEffect, useRef, useState } from "react";
 import ErrorMesssage from "../Model/ErrorMessage";
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
 import Spinner from "../Model/Spinner";
 import { UserContext } from "../../context/authContext";
+import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;
 function Share() {
   const [skeleton, setSkeleton] = useState(true);
@@ -55,11 +56,13 @@ function Share() {
     <div className="share">
       <div className="share__top">
         <Link to={routesPublic.profile+"/"+currentUser.id} className="share__top__avatar">
-          {skeleton && isFirstLoading? <Skeleton className="avatar"/> :  <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/uploads/no-image.webp"} alt={currentUser.firstName}  />}
+        {skeleton && isFirstLoading ? <LoadingSkeleton circle/> : <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/uploads/no-image.webp"} alt={currentUser.firstName}  />}
+   
         </Link>
 
         <div className="share__top__search">
-        {skeleton && isFirstLoading? <Skeleton className="skeleton"/> :     <input onFocus={() => setShowCreateShare(true)} type="text" placeholder={`${currentUser.firstName} ơi,bạn đang nghĩ gì thế?`}   />}
+        {skeleton && isFirstLoading ? <LoadingSkeleton  height={30}/> :  <input onFocus={() => setShowCreateShare(true)} type="text" placeholder={`${currentUser.firstName} ơi,bạn đang nghĩ gì thế?`}    />}
+   
        
         </div>
       </div>
@@ -69,12 +72,11 @@ function Share() {
           className="share__bottom__icon"
           onClick={()=>setShowError(true)}
         >
-        {skeleton && isFirstLoading? <div className="wrapper-skeleton" ><Skeleton    className="skeleton"/></div> :   
-          <>
+      {skeleton && isFirstLoading ? <LoadingSkeleton  /> : <>
           <img src={img1} alt="" />
           <span>Video trực tiếp</span>
-          </>
-          }
+          </>}  
+          
 
        
         </div>
@@ -82,21 +84,18 @@ function Share() {
           className="share__bottom__icon"
           onClick={() => setShowCreateShare(true)}
         >
-         {skeleton && isFirstLoading? <div className="wrapper-skeleton" ><Skeleton    className="skeleton"/></div> :   
-          <>
+       {skeleton && isFirstLoading ? <LoadingSkeleton  /> : <>
           <img src={img2} alt="" />
           <span>Đăng bài</span>
-          </>
-         }
+          </>}  
+         
         </div>
         <div className="share__bottom__icon">
-
-        {skeleton && isFirstLoading? <div className="wrapper-skeleton" ><Skeleton    className="skeleton"/></div> :   
-          <>
+        {skeleton && isFirstLoading ? <LoadingSkeleton  /> :  <>
           <img src={img3} alt="" />
           <span   onClick={()=>setShowError(true)}>Cảm xúc/Hoạt động</span>
-          </>
-         }
+          </>} 
+         
      
         </div>
       </div>
