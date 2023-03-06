@@ -24,6 +24,7 @@ let isFirstLoading = true;
 function Stories() {
   const navigationNextRef = useRef(null);
   const navigationPrevRef = useRef(null);
+  
   const [skeleton, setSkeleton] = useState(true);
   const {currentUser} = useContext(UserContext);
   const profilePic = "/uploads/"+currentUser.profilePic;
@@ -119,31 +120,32 @@ function Stories() {
         >
           {stories.map((story, index) => (
             <>
-              {index === 0 ? (
-                <SwiperSlide key={index}>
-                : 
+           
                 
-                <Link to={routesPublic.storiesCreate} className="stories__story">
-                    <div className="stories__story__image-story" style={{backgroundImage:`url(${currentUser.profilePic})`}}></div>
-                    <div className="stories__story__current-user" style={{backgroundImage: `url(${profilePic})`}}></div>
-                    <div
-                      className="stories__story__up-story"
-                      
-                    ></div>
-                    <div className="stories__story__icon">
-                      <GrAddCircle />
-                      <span>Tạo tin</span>
-                    </div>
-                  </Link>
-                 
-                </SwiperSlide>
-              ) : (
+              
                 <>
+                {index === 0 && <SwiperSlide key={index}>
+              
+              <Link to={routesPublic.storiesCreate} className="stories__story">
+                  <div className="stories__story__image-story" style={{backgroundImage:`url(${currentUser.profilePic})`}}></div>
+                  <div className="stories__story__current-user" style={{backgroundImage: `url(${profilePic})`}}></div>
+                  <div
+                    className="stories__story__up-story"
+                    
+                  ></div>
+                  <div className="stories__story__icon">
+                    <GrAddCircle />
+                    <span>Tạo tin</span>
+                  </div>
+                </Link>
+               
+              </SwiperSlide>
+              }
                   <SwiperSlide key={index}>
                     <Story story={story} />
                   </SwiperSlide>
                 </>
-              )}
+            
             </>
           ))}
         </Swiper>

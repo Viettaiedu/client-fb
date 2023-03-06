@@ -17,30 +17,29 @@ export const getStories =  () => async (dispatch) => {
         })
     }
 }
-// export const addPost =  (inputs) => async (dispatch) => {
-//     try {
-//         const { data } = await  httpsRequest.post('/posts',inputs);
-//         console.log(data);
-//        dispatch({
-//         type:actionTypes.ADD_POST,
-//         payload : data
-//       })
-//     }
-//     catch(e) {
-//         console.log("Error",e);
-//     }
-// }
-// export const deletePost =  (postId) => async (dispatch) => {
-//     try {
-//          await  httpsRequest.delete('/posts/'+postId);
-//        dispatch({
-//         type:actionTypes.DELETE_POST,
-//         payload: {
-//             id : postId
-//         }
-//       })
-//     }
-//     catch(e) {
-//         console.log("Error",e);
-//     }
-// }
+export const addStory =  (inputs) => async (dispatch) => {
+    try {
+        const { data } = await  httpsRequest.post('/stories',inputs);
+       dispatch({
+        type:actionTypes.ADD_STORY,
+        payload : data
+      })
+    }
+    catch(e) {
+        console.log("Error",e);
+    }
+}
+export const deleteStory =  (id) => async (dispatch) => {
+    try {
+         await  httpsRequest.delete('/stories/?id='+id);
+       dispatch({
+        type:actionTypes.DELETE_STORY,
+        payload: {
+            id : id
+        }
+      })
+    }
+    catch(e) {
+        console.log("Error",e);
+    }
+}

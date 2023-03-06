@@ -1,7 +1,7 @@
 
 
 import './button.scss';
-function Button({btnConfirm , btnReject , text}) {
+function Button({btnConfirm , btnReject , text ,onClick}) {
     const btnClasses = []
 
     if(btnConfirm) {
@@ -11,7 +11,7 @@ function Button({btnConfirm , btnReject , text}) {
         btnClasses.push("btns__reject");
     }
     return ( 
-        <button className={[...btnClasses]}>{text}</button>
+        <button className={[...btnClasses]} onClick={onClick} >{text}</button>
      );
 }
 

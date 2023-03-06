@@ -15,7 +15,7 @@ function Posts() {
     return ( 
         <>
         {isLoading ? "Loading..." : 
-        <div className={`posts`}>
+        <div className="posts">
               {posts.map((post,index )=> (
                   <Post  post={post} key={index} />
               ))}  

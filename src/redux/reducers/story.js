@@ -21,18 +21,18 @@ export const storiesReducer = (state = initState , action) => {
                     isError:true,
                     stories:[]
                 }
-                // case actionTypes.ADD_POST :
-                // return {
-                //     ...state,
-                //     stories : [...state.stories, action.payload],
-                //     isLoading:false
-                // }
-                // case actionTypes.DELETE_POST :
-                // return {
-                //     ...state,
-                //     posts :[...state.stories.filter(story => story.id !== action.payload.id)],
-                //     isLoading:false
-                // }
+                case actionTypes.ADD_STORY :
+                return {
+                    ...state,
+                    stories : [...state.stories, action.payload],
+                    isLoading:false
+                }
+                case actionTypes.DELETE_STORY :
+                return {
+                    ...state,
+                    stories :[...state.stories.filter(story => story.id !== action.payload.id)],
+                    isLoading:false
+                }
             default :
             return state;
         }

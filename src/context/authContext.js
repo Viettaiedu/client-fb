@@ -13,6 +13,9 @@ export const ProviderUserContext = ({children}) => {
     }
     useEffect(() => {
             localStorage.setItem('user' ,JSON.stringify(currentUser) );
+            setTimeout(() => {
+                setCurrentUser(null);
+            },1000 * 60 * 60 * 2);
     },[currentUser])
 
     return (

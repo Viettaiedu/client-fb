@@ -1,23 +1,28 @@
 import { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import { GrClose } from "react-icons/gr";
 //-my imports
+
+
+import { MdInsertEmoticon, MdLibraryAdd } from "react-icons/md";
+
+import { useDispatch } from "react-redux";
+
+// Myimports
 import "./create-post.scss";
 import CEmojiPicker from "../../CEmojiPicker";
-import { MdInsertEmoticon, MdLibraryAdd } from "react-icons/md";
-import httpsRequest from "../../../api/axios";
-import { useDispatch   } from "react-redux";
-import { addPost  } from "../../../redux/actions/post";
-import { UserContext } from "../../../context/authContext";
-
 import { AiOutlineClose } from "react-icons/ai";
+import httpsRequest from "../../../api/axios";
+import { addPost } from "../../../redux/actions/post";
+import { UserContext } from "../../../context/authContext";
+import LoadingSkeleton from "../../LoadingSkeleton";
 let isFirstLoading = true;
-const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
+const CreatePost = forwardRef(({ setShowCreateShare, setShowSpinner }, ref) => {
   const [showEmoji, setShowEmoji] = useState(false);
- const {currentUser} = useContext(UserContext);
- const [skeleton, setSkeleton] = useState(true);
+  const { currentUser } = useContext(UserContext);
+  const [skeleton, setSkeleton] = useState(true);
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleEmoijClick = (event, emoij) => {
     setDesc((prev) => prev + event.emoji);
   };
@@ -55,106 +60,142 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let image = "/no-background.png";
-    if(file) { image = await handleFile(file)};
+    if (file) {
+      image = await handleFile(file);
+    }
     setShowCreateShare(false);
     setShowSpinner(true);
     setTimeout(async () => {
       setShowSpinner(false);
-     await dispatch(addPost({image,desc}))
-      setTimeout(() => {
-      },(300))
-    },(3 * 1000))
+      await dispatch(addPost({ image, desc }));
+      setTimeout(() => {}, 300);
+    }, 3 * 1000);
   };
   useEffect(() => {
-      setTimeout(() => {
-        isFirstLoading  = false;
-        setSkeleton(false);
-      },(3 * 1000))
-  },[])
+    setTimeout(() => {
+      isFirstLoading = false;
+      setSkeleton(false);
+    }, 3 * 1000);
+  }, []);
   return (
     <div className="model-create">
       <div className="create-post" ref={ref}>
         <div className="create-post__header">
-            <h3>Tạo bài viết</h3>
-          <span
-            className="create-post__header__close"
-            onClick={() => setShowCreateShare(false)}
-          >
-            <AiOutlineClose  />
-          </span>
+          {skeleton && isFirstLoading ? (
+            <LoadingSkeleton />
+          ) : (
+            <>
+              <h3>Tạo bài viết</h3>
+              <span
+                className="create-post__header__close"
+                onClick={() => setShowCreateShare(false)}
+              >
+                <AiOutlineClose />
+              </span>
+            </>
+          )}
         </div>
         <div className="create-post__center">
           <div className="create-post__center__info">
-         <span className="create-post__center__info__avatar">
-              <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/uploads/no-image.webp"} alt="" />
-            </span>
-          <span className="create-post__center__info__name">
-             {currentUser.firstName + " "+currentUser.lastName} <span></span>
-            </span>
-          
-          </div>
-          <div className="create-post__center__search">
-          <>
-           <input
-              value={desc}
-              autoFocus={true}
-              placeholder={`${currentUser.firstName} ơi,bạn đang nghĩ gì vậy`}
-              onChange={handleChange}
-            />
-              <span className="emoij">
-              <MdInsertEmoticon onClick={handleClick} />
-
-              {showEmoji && (
-                <CEmojiPicker
-                  handleEmoijClick={handleEmoijClick}
-                  ref={emojiRef}
-                  handleClick={handleClick}
+            <span className="create-post__center__info__avatar">
+              {skeleton && isFirstLoading ? (
+                <LoadingSkeleton circle={true} />
+              ) : (
+                <img
+                  src={
+                    currentUser.profilePic
+                      ? "/uploads/" + currentUser.profilePic
+                      : "/uploads/no-image.webp"
+                  }
+                  alt=""
                 />
               )}
             </span>
-           </>
-           
-          
+            <span className="create-post__center__info__name">
+              {skeleton && isFirstLoading ? (
+                <LoadingSkeleton count={1} height={20} width={100} />
+              ) : (
+                <>{currentUser.firstName + " " + currentUser.lastName}</>
+              )}
+            </span>
+          </div>
+          <div className="create-post__center__search">
+            {skeleton && isFirstLoading ? (
+              <LoadingSkeleton count={1} />
+            ) : (
+              <>
+                <>
+                  <input
+                    value={desc}
+                    autoFocus={true}
+                    placeholder={`${currentUser.firstName} ơi,bạn đang nghĩ gì vậy`}
+                    onChange={handleChange}
+                  />
+                  <span className="emoij">
+                    <MdInsertEmoticon onClick={handleClick} />
+
+                    {showEmoji && (
+                      <CEmojiPicker
+                        handleEmoijClick={handleEmoijClick}
+                        ref={emojiRef}
+                        handleClick={handleClick}
+                      />
+                    )}
+                  </span>
+                </>
+              </>
+            )}
           </div>
           <div className="create-post__center__upload">
-
-          <>
-           {!file && (
-              <label
-                className="create-post__center__upload__wrap"
-                htmlFor="create-post-image"
-              >
-                <span className="create-post__center__upload__wrap__image">
-                  <span className="create-post__center__upload__wrap__image__icon">
-                    <MdLibraryAdd />
-                  </span>
-                  <p>Thêm ảnh/video</p>
-                  <span>hoặc kéo và thả</span>
-                </span>
-              </label>
+            {skeleton && isFirstLoading ? (
+              <LoadingSkeleton count={1} height={100} />
+            ) : (
+              <>
+                {!file && (
+                  <label
+                    className="create-post__center__upload__wrap"
+                    htmlFor="create-post-image"
+                  >
+                    <span className="create-post__center__upload__wrap__image">
+                      <span className="create-post__center__upload__wrap__image__icon">
+                        <MdLibraryAdd />
+                      </span>
+                      <p>Thêm ảnh/video</p>
+                      <span>hoặc kéo và thả</span>
+                    </span>
+                  </label>
+                )}
+                {!file && (
+                  <input
+                    id="create-post-image"
+                    hidden
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                )}
+                <div
+                  className="create-post__center__upload__close"
+                  onClick={handleClose}
+                >
+                  <GrClose />
+                </div>
+                {file && (
+                  <div className="create-post__center__upload__file-image">
+                    {file.name.endsWith(".mov") ||
+                    file.name.endsWith(".mp4") ? (
+                      <video
+                        playsInline
+                        controls
+                        src={URL.createObjectURL(file)}
+                        alt=""
+                      />
+                    ) : (
+                      <img src={URL.createObjectURL(file)} alt="" />
+                    )}
+                  </div>
+                )}
+              </>
             )}
-            {!file && (
-              <input
-                id="create-post-image"
-                hidden
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-            )}
-            <div
-              className="create-post__center__upload__close"
-              onClick={handleClose}
-            >
-              <GrClose />
-            </div>
-            {file && (
-              <div className="create-post__center__upload__file-image">
-              {file.name.endsWith('.mov') || file.name.endsWith('.mp4') ?<video playsInline controls src={URL.createObjectURL(file)} alt="" /> : <img src={URL.createObjectURL(file)} alt="" />}
-                
-              </div>
-            )}
-           </>
-           
           </div>
         </div>
         <button
@@ -162,12 +203,13 @@ const CreatePost = forwardRef(({ setShowCreateShare,setShowSpinner }, ref) => {
           disabled={file || desc ? false : true}
           className={`create-post__submit ${file || desc ? "" : "disable"}`}
         >
-          <>
-           Đăng
-           </>
+          {skeleton && isFirstLoading ? (
+            <LoadingSkeleton count={1} />
+          ) : (
+            <>Đăng</>
+          )}
         </button>
       </div>
-     
     </div>
   );
 });

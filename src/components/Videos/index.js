@@ -5,8 +5,17 @@ import { Navigation, Pagination  } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-function Videos({ stories ,idShow ,handleChangeSlide ,thumbsSwiper }) {
-    
+import { useEffect, useState } from "react";
+import LoadingSkeleton from "../LoadingSkeleton";
+const isFirstLoading = true;
+function Videos({ stories ,idShow ,handleChangeSlide,setIdShow ,thumbsSwiper }) {
+  const [skeleton, setSkeleton] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setSkeleton(false);
+      isFirstLoading = false;
+    }, 0.5 * 1000);
+  }, []);
   return (
     <Swiper
     direction={"vertical"}
@@ -25,13 +34,16 @@ function Videos({ stories ,idShow ,handleChangeSlide ,thumbsSwiper }) {
   >
     {stories.map((story, index) => (
       <SwiperSlide key={index}>
-    <Video
-            story={story}  idShow={idShow}
-          />
+      {isFirstLoading && skeleton ? <LoadingSkeleton /> : <Video
+            story={story} setIdShow={setIdShow}  idShow={idShow}
+          />}
       </SwiperSlide>
     ))}
+  
     <div className="swiper-button-next"></div>
       <div className="swiper-button-prev"></div>
+    
+    
   </Swiper>
     
   );
