@@ -1,7 +1,7 @@
 
 
 import {Link} from 'react-router-dom'
-import {  useContext, useState } from 'react';
+import {  useContext,  useState } from 'react';
 import { BsChevronCompactDown,BsChevronCompactUp } from 'react-icons/bs';
 
 //---My imports
@@ -16,6 +16,7 @@ function LeftBar() {
     const [itemsShortcuts , setItemsShortcuts] = useState(imagesBottomLeftBar.slice(0,5));
     const [showAdd , setShowAdd] = useState(true);
     const [shortcuts , setShortcuts] = useState(true);
+   
     const handleShow = () => {
         setItems(imagesLeftBar);
         setShowAdd(false);

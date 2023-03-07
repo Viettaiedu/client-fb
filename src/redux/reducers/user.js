@@ -1,25 +1,25 @@
 import * as  actionTypes from '../constants/user'; 
 const initState = {
-    users : [],
+    userFriends : [],
     isLoading:true,
     isError:true
 }
-export const usersReducer = (state = initState , action) => {
+export const userFriendsReducer= (state = initState , action) => {
         switch(action.type) {
             case actionTypes.GET_USERS_REQUEST :
                 return {
                     isLoading:true,
-                    users:[]
+                    userFriends:[]
                 }
-            case actionTypes.GET_USERS_SUCCESS :
+            case actionTypes.GET_USERS_SUCCESS:
                 return {
                     isLoading:false,
-                    users:action.payload
+                    userFriends:action.payload
                 }
             case actionTypes.GET_USERS_FAIL :
                 return {
                     isError:true,
-                    users:[]
+                    userFriends:[]
                 }
                 // case actionTypes.ADD_USER :
                 // return {

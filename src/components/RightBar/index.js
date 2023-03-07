@@ -1,9 +1,22 @@
 import "./right-bar.scss";
-
+import { useDispatch, useSelector } from "react-redux";
 import { AiTwotoneVideoCamera, AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Button from "../Button";
+import { getUserFriends } from "../../redux/actions/user";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { routesPublic } from "../../config/routes";
+import { UserContext } from "../../context/authContext";
+import httpsRequest from "../../api/axios";
 function RightBar() {
+  const { userFriends } = useSelector((state) => state.userFriends);
+  const [userOthers, setUserOthers] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserFriends());
+  }, [dispatch]);
+  const {currentUser} =useContext(UserContext);
   const suggestAddFriends = [
     {
       image:
@@ -13,6 +26,17 @@ function RightBar() {
     },
   ];
 
+  useEffect(() => {
+   const getUserOthers = async () => {
+     try {
+          const {data} = await httpsRequest.get('/users/others');
+          setUserOthers(data);
+        }catch(e) {
+          console.log("error" ,e);
+        }
+    }
+    getUserOthers();
+  },[])
   return (
     <div className="right-bar">
       <div className="right-bar__items">
@@ -29,8 +53,8 @@ function RightBar() {
                 <span>{item.createdAt}</span>
               </div>
               <div className="btns">
-              <Button btnConfirm={true} text="Xác nhận"/>
-              <Button btnReject={true} text="Xóa"/>
+                <Button btnConfirm={true} text="Xác nhận" />
+                <Button btnReject={true} text="Xóa" />
               </div>
             </div>
           </div>
@@ -58,7 +82,7 @@ function RightBar() {
       {/* Người liên hệ  */}
       <div className="right-bar__items">
         <div className="right-bar__items__title">
-          <h4>Người liên hệ</h4>
+          <h4>Bạn của tôi</h4>
           <div className="right-bar__items__title__icons">
             <AiTwotoneVideoCamera />
             <AiOutlineSearch />
@@ -66,260 +90,41 @@ function RightBar() {
           </div>
         </div>
         <div className="right-bar__items__accounts">
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
-          <div className="right-bar__items__accounts__account">
-          <div className="right-bar__items__accounts__account__image">
-            <img src="/uploads/no-image.webp" alt="" />
-          <span className="right-bar__items__accounts__account__image__circle"></span>
-          </div>
-            <span className="right-bar__items__accounts__account__name">
-              Viết Tài
-            </span>
-          </div>
+          {userFriends.map((user, index) => (
+            currentUser.id !== user.id && (<Link to={routesPublic.profile+"/"+user.id} key={index} className="right-bar__items__accounts__account">
+              <div className="right-bar__items__accounts__account__image">
+                <img src={"/uploads/"+user.profilePic} alt="" />
+                <span className="right-bar__items__accounts__account__image__circle"></span>
+              </div>
+              <span className="right-bar__items__accounts__account__name">
+                {user.firstName +" "+user.lastName}
+              </span>
+            </Link>)
+            
+          ))}
         </div>
       </div>
+   
+      <div className="right-bar__items">
+        <div className="right-bar__items__title">
+          <h4>Gợi ý kết bạn</h4>
+        </div>
+        <div className="right-bar__items__accounts">
+          {userOthers.map((user, index) => (
+            currentUser.id !== user.id && (<Link to={routesPublic.profile+"/"+user.id} key={index} className="right-bar__items__accounts__account">
+              <div className="right-bar__items__accounts__account__image">
+                <img src={"/uploads/"+user.profilePic} alt="" />
+                <span className="right-bar__items__accounts__account__image__circle"></span>
+              </div>
+              <span className="right-bar__items__accounts__account__name">
+                {user.firstName +" "+user.lastName}
+              </span>
+            </Link>)
+            
+          ))}
+        </div>
+      </div>
+   
     </div>
   );
 }

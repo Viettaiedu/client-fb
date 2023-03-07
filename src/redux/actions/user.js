@@ -1,11 +1,11 @@
 import * as actionTypes from '../constants/user';
 import httpsRequest from '../../api/axios';
-export const getUsers =  () => async (dispatch) => {
+export const getUserFriends =  () => async (dispatch) => {
     try {
         dispatch({
             type: actionTypes.GET_USERS_REQUEST,
         })
-        const {data} = await httpsRequest.get('/users');
+        const {data} = await httpsRequest.get('/users/friends');
         dispatch({
             type: actionTypes.GET_USERS_SUCCESS,
             payload:data 
@@ -17,6 +17,8 @@ export const getUsers =  () => async (dispatch) => {
         })
     }
 }
+
+
 // }
 // export const addComment =  (inputs) => async (dispatch) => {
 //     try {

@@ -22,6 +22,10 @@
         flex-direction: column;
         border-bottom: 1px solid themed(border);
         padding: 12px 0px 14px 0px;
+
+        &:last-child {
+            border-bottom: 1px solid transparent!important;
+        }
         &__title {
             display: flex;
             justify-content: space-between;
