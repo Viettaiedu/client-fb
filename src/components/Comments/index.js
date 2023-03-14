@@ -8,6 +8,7 @@ import Comment from "../Comment";
 import { UserContext } from "../../context/authContext";
 import { useDispatch } from "react-redux";
 import { addComment } from "../../redux/actions/comment";
+import Avatar from '../Avatar';
 import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;
 function Commnents({ setShowComment, showCommnent, comments, postId }) {
@@ -80,16 +81,10 @@ function Commnents({ setShowComment, showCommnent, comments, postId }) {
         <>
           <span className="comments__current-user__image">
             {skeleton && isFirstLoading ? (
-              <LoadingSkeleton circle />
+              <LoadingSkeleton circle="true" />
             ) : (
-              <img
-                alt={currentUser.firstName}
-                src={
-                  currentUser.profilePic
-                    ? "/uploads/" + currentUser.profilePic
-                    : "/uploads/no-image.webp"
-                }
-              />
+              <Avatar src={currentUser.profilePic} alt={currentUser.firstName}/>
+             
             )}
           </span>
           <span className="comments__current-user__input">

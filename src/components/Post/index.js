@@ -17,6 +17,7 @@ import { addLike, deleteLike, getLikes } from "../../redux/actions/like";
 import { UserContext } from "../../context/authContext";
 import { deletePost } from "../../redux/actions/post";
 import LoadingSkeleton from "../LoadingSkeleton";
+import Avatar from "../Avatar";
 let isFirstLoading = true;
 function Post({ post }) {
   const [showCommnent, setShowComment] = useState(false);
@@ -61,16 +62,10 @@ function Post({ post }) {
           className="post__header__avatar"
         >
           {skeleton && isFirstLoading ? (
-            <LoadingSkeleton circle />
+            <LoadingSkeleton circle="true" />
           ) : (
-            <img
-              src={
-                post.profilePic
-                  ? "/uploads/" + post.profilePic
-                  : "/uploads/no-image.webp"
-              }
-              alt={post.fistName}
-            />
+            <Avatar src={   post.profilePic} alt={post.fistName}/>
+            
           )}
         </Link>
         <div className="post__header__info ">
@@ -97,7 +92,7 @@ function Post({ post }) {
         <div className="post__header__options">
           <span className="post__header__options__icon">
             {skeleton && isFirstLoading ? (
-              <LoadingSkeleton circle />
+              <LoadingSkeleton circle="true" />
             ) : (
               <>
                 {" "}
@@ -115,7 +110,7 @@ function Post({ post }) {
               ) : (
                 <>
                   {" "}
-                  <MdOutlineClose circle />
+                  <MdOutlineClose circle="true" />
                 </>
               )}
             </span>

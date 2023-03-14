@@ -141,7 +141,7 @@ function Stories() {
                
               </SwiperSlide>
               }
-                  <SwiperSlide key={index}>
+                  <SwiperSlide key={story.id}>
                     <Story story={story} />
                   </SwiperSlide>
                 </>
@@ -195,7 +195,7 @@ function Stories() {
                 </SwiperSlide>
               ) : (
                 <>
-                  <SwiperSlide key={index}>
+                  <SwiperSlide key={story.id}>
                     <Story reels story={story} />
                   </SwiperSlide>
                 </>

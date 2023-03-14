@@ -7,6 +7,7 @@ import "./left-bar.scss";
 import { imagesLeftBar, imagesBottomLeftBar } from "../../assets/image-icons";
 import { routesPublic } from "../../config/routes";
 import { UserContext } from "../../context/authContext";
+import Avatar from "../Avatar";
 
 function LeftBar() {
   const { currentUser } = useContext(UserContext);
@@ -40,14 +41,7 @@ function LeftBar() {
           to={routesPublic.profile + "/" + currentUser.id}
           className="left-bar__items__item"
         >
-          <img
-            src={
-              currentUser.profilePic
-                ? "/uploads/" + currentUser.profilePic
-                : "/uploads/no-image.webp"
-            }
-            alt={currentUser.firstName}
-          />
+             <Avatar src={currentUser.profilePic} alt={currentUser.firstName}/>
           <span className="left-bar__items__item__name">
             {currentUser.firstName + " " + currentUser.lastName}
           </span>

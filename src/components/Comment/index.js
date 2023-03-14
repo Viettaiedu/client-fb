@@ -33,7 +33,7 @@ function Comment({ comment, postId }) {
           <div className="comments__comment">
             <span className="comments__comment__image">
               {skeleton && isFirstLoading ? (
-                <LoadingSkeleton circle />
+                <LoadingSkeleton circle="true" />
               ) : (
                 <img src={"/uploads/" + comment.profilePic} alt="" />
               )}

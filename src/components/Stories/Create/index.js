@@ -17,6 +17,7 @@ import httpsRequest from "../../../api/axios";
 import { addStory } from "../../../redux/actions/story";
 import Spinner from "../../Modal/Spinner";
 import LoadingSkeleton from "../../LoadingSkeleton";
+import Avatar from "../../Avatar";
 let isFirstLoading = true;
 function Create() {
   const { currentUser } = useContext(UserContext);
@@ -72,7 +73,7 @@ function Create() {
             to={routesPublic.home}
             className="stories-create__left__header__close"
           >
-           {isFirstLoading && skeleton ? <LoadingSkeleton  circle={true} />: <AiOutlineClose />}
+           {isFirstLoading && skeleton ? <LoadingSkeleton  circle="true" />: <AiOutlineClose />}
           </Link>
           <Link
             to={routesPublic.home}
@@ -96,14 +97,7 @@ function Create() {
             to={routesPublic.profile + "/" + currentUser.id}
             className="stories-create__left__setting__user"
           >
-            <img
-              src={
-                currentUser.profilePic
-                  ? "/uploads/" + currentUser.profilePic
-                  : "/uploads/no-image.webp"
-              }
-              alt=""
-            />
+           <Avatar src={     currentUser.profilePic} alt={currentUser.fistName}/>
             <span>{currentUser.firstName + " " + currentUser.lastName}</span>
           </Link>
         </div>

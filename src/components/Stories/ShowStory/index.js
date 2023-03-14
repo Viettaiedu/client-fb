@@ -15,6 +15,7 @@ import Videos from "../../Videos";
 import { routesPublic } from "../../../config/routes";
 import HeaderRight from "../../Header/HeaderRight";
 import LoadingSkeleton from "../../LoadingSkeleton";
+import Avatar from "../../Avatar";
 const isFirstLoading = true;
 function ShowStory() {
   const storiesRe = useSelector((state) => state.stories);
@@ -42,7 +43,7 @@ function ShowStory() {
             to={routesPublic.home}
             className="show-story__left__header__close"
           >
-           {isFirstLoading && skeleton ? <LoadingSkeleton   circle={true} />: <AiOutlineClose />}
+           {isFirstLoading && skeleton ? <LoadingSkeleton   circle="true" />: <AiOutlineClose />}
           
            
           </Link>
@@ -50,7 +51,7 @@ function ShowStory() {
             to={routesPublic.home}
             className="show-story__left__header__img"
           >
-           {isFirstLoading && skeleton ? <LoadingSkeleton   circle={true} />:  <img src="/logo.png" alt="" />}
+           {isFirstLoading && skeleton ? <LoadingSkeleton   circle="true" />:  <img src="/logo.png" alt="" />}
            
           </Link>
         </div>
@@ -97,12 +98,10 @@ function ShowStory() {
                 className={`show-story__left__all-stories__item ${
                   index === idShow ? "select" : ""
                 }`}
+                key={index}
               >
                 <span className="show-story__left__all-stories__item__image">
-                  <img
-                    src={"/uploads/" + story.profilePic}
-                    alt={story.firstName}
-                  />
+                <Avatar image={story.profilePic} alt={story.firstName}/> 
                 </span>
                 <div className="show-story__left__all-stories__item__info">
                   <h4>{story.firstName + " " + story.lastName}</h4>

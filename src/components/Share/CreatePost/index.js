@@ -15,6 +15,7 @@ import httpsRequest from "../../../api/axios";
 import { addPost } from "../../../redux/actions/post";
 import { UserContext } from "../../../context/authContext";
 import LoadingSkeleton from "../../LoadingSkeleton";
+import Avatar from "../../Avatar";
 let isFirstLoading = true;
 const CreatePost = forwardRef(({ setShowCreateShare, setShowSpinner }, ref) => {
   const [showEmoji, setShowEmoji] = useState(false);
@@ -99,16 +100,9 @@ const CreatePost = forwardRef(({ setShowCreateShare, setShowSpinner }, ref) => {
           <div className="create-post__center__info">
             <span className="create-post__center__info__avatar">
               {skeleton && isFirstLoading ? (
-                <LoadingSkeleton circle={true} />
+                <LoadingSkeleton circle="true" />
               ) : (
-                <img
-                  src={
-                    currentUser.profilePic
-                      ? "/uploads/" + currentUser.profilePic
-                      : "/uploads/no-image.webp"
-                  }
-                  alt=""
-                />
+                <Avatar src={     currentUser.profilePic} alt={currentUser.fistName}/>
               )}
             </span>
             <span className="create-post__center__info__name">

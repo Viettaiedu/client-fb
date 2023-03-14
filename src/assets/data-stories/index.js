@@ -1,7 +1,7 @@
 export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
-      id: "",
+      id: 213,
       views:"2,6",
       video: 'no-background.webp'
       
@@ -9,7 +9,7 @@ export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
      
-      id: "",
+      id: 123,
       views:"2,6",
       video: 'no-background.webp'
       
@@ -17,7 +17,7 @@ export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
      
-      id: "",
+      id:1234,
       views:"2,6",
       video: 'no-background.webp'
      
@@ -25,22 +25,14 @@ export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
      
-      id: "",
+      id: 12343,
       views:"2,6",
       video: 'no-background.webp'
      
     },
     {
       profilePic: "/uploads/no-image.webp",
-      id: "",
-      views:"2,6",
-      video: 'no-background.webp'
-      
-    },
-    {
-      profilePic: "/uploads/no-image.webp",
-     
-      id: "",
+      id:123431,
       views:"2,6",
       video: 'no-background.webp'
       
@@ -48,7 +40,15 @@ export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
      
-      id: "",
+      id: 1234311,
+      views:"2,6",
+      video: 'no-background.webp'
+      
+    },
+    {
+      profilePic: "/uploads/no-image.webp",
+     
+      id: 53,
       views:"2,6",
       video: 'no-background.webp'
      
@@ -56,7 +56,7 @@ export  const stories2 = [
     {
       profilePic: "/uploads/no-image.webp",
      
-      id: "",
+      id: 54,
       views:"2,6",
       video: 'no-background.webp'
      

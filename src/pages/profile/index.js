@@ -17,6 +17,7 @@ import { RiMessengerFill } from "react-icons/ri";
 import ImageUser from "../../components/Modal/ImageUser";
 import Spinner from "../../components/Modal/Spinner";
 import Button from "../../components/Button";
+import Avatar from "../../components/Avatar";
 
 function Profile() {
   const { userId } = useParams();
@@ -174,7 +175,7 @@ function Profile() {
               <div className="profile__top__info__user__left">
                 <span className="profile__top__info__user__left__avatar">
                   <span className="profile__top__info__user__left__avatar__image">
-                    <img src={"/uploads/" + userProfile.profilePic} alt="" />
+                  <Avatar src={     userProfile.profilePic} alt={userProfile.fistName}/>
                   </span>
 
                   <div>

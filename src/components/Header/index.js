@@ -26,7 +26,7 @@ function Header() {
     <div className="header">
       <Link to={routesPublic.home} className="header__left">
       <span className="header__left__logo" >
-      {skeleton && isFirstLoading ? <LoadingSkeleton circle /> :     <img src="/logo.png" alt="facebook" />}
+      {skeleton && isFirstLoading ? <LoadingSkeleton circle="true" /> :     <img src="/logo.png" alt="facebook" />}
         
       </span>
       

@@ -4,6 +4,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
+
 import "./story.scss";
 let isFirstLoading = true;
 function Story({ story, reels }) {
@@ -32,7 +33,7 @@ function Story({ story, reels }) {
         <Link to={routesPublic.profile +"/"+story.userId}>
         <img
           className="stories__story__profile-pic"
-          src={"/uploads/"+story.profilePic}
+          src={"/uploads/"+(story.profilePic ? story.profilePic : "no-image.webp")}
           alt=""
         />
         </Link>

@@ -11,6 +11,7 @@ import Chat from "../../Chat";
 import Menu from "../../Menu";
 import { UserContext } from "../../../context/authContext";
 import LoadingSkeleton from '../../LoadingSkeleton';
+import Avatar from "../../Avatar";
 let isFirstLoading = true;
 function HeaderRight({isHideMessage}) {
   const [skeleton, setSkeleton] = useState(true);
@@ -105,7 +106,7 @@ function HeaderRight({isHideMessage}) {
   }, [menuRef]);
     return ( <div className="header__right">
     <div className={`header__right__one ${showMenu ? "select" : ""} mobile-none`} title="menu">
-    { skeleton && isFirstLoading ? <LoadingSkeleton  circle/> : <>
+    { skeleton && isFirstLoading ? <LoadingSkeleton  circle="true"/> : <>
 
       <TiThMenu className="header__right__one__icon " onClick={() => setShowMenu(!showMenu)}/>
       <TextHover text={"Menu"} />
@@ -114,13 +115,13 @@ function HeaderRight({isHideMessage}) {
      
     </div>
     <div className="header__right__one mobile-display screen-large-992-none">
-    { skeleton && isFirstLoading ? <LoadingSkeleton  circle/> : <>
+    { skeleton && isFirstLoading ? <LoadingSkeleton  circle="true"/> : <>
     <GrAdd className="header__right__one__icon " />
     </>}
       
     </div>
     {!isHideMessage && <div className={`header__right__one ${showChat ? "select" : ""}`} title="chat">
-    { skeleton && isFirstLoading ? <LoadingSkeleton  circle/> : <>
+    { skeleton && isFirstLoading ? <LoadingSkeleton  circle="true"/> : <>
     <FaFacebookMessenger className="header__right__one__icon"   onClick={() => setShowChat(!showChat)}/>
       <TextHover text={"Messenger"} />
     {showChat &&  <Chat  ref={chatRef}/>} 
@@ -133,7 +134,7 @@ function HeaderRight({isHideMessage}) {
       className={`header__right__one ${showNotification ? "select" : ""}`}
       title="notifi"
     >
-      { skeleton && isFirstLoading ? <LoadingSkeleton  circle/> : <>
+      { skeleton && isFirstLoading ? <LoadingSkeleton  circle="true"/> : <>
       <TextHover text={"Thông báo"} />
       <IoMdNotifications
         className="header__right__one__icon"
@@ -150,13 +151,9 @@ function HeaderRight({isHideMessage}) {
       className={`header__right__one ${showAccountSetting ? "select" : ""}`}
       title="account"
     >
-     { skeleton && isFirstLoading ? <LoadingSkeleton  circle/> : <>      <TextHover text={"Tài khoản"} />
-      <img
-        className="header__right__one__avatar"
-        src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic : "/uploads/no-image.webp"  }
-        alt={currentUser.name}
-        onClick={() => setShowAccountSetting(!showAccountSetting)}
-      />
+     { skeleton && isFirstLoading ? <LoadingSkeleton  circle="true"/> : <>      <TextHover text={"Tài khoản"} />
+     <Avatar className="header__right__one__avatar" src={currentUser.profilePic} alt={currentUser.firstName}   onClick={() => setShowAccountSetting(!showAccountSetting)}/>
+    
       {showAccountSetting && (
         <AccountFuture
           setShowAccountSetting={setShowAccountSetting}

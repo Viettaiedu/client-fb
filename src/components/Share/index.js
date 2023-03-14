@@ -12,6 +12,7 @@ import { routesPublic } from "../../config/routes";
 import Spinner from "../Modal/Spinner";
 import { UserContext } from "../../context/authContext";
 import LoadingSkeleton from "../LoadingSkeleton";
+import Avatar from "../Avatar";
 let isFirstLoading = true;
 function Share() {
   const [skeleton, setSkeleton] = useState(true);
@@ -56,7 +57,7 @@ function Share() {
     <div className="share">
       <div className="share__top">
         <Link to={routesPublic.profile+"/"+currentUser.id} className="share__top__avatar">
-        {skeleton && isFirstLoading ? <LoadingSkeleton circle/> : <img src={currentUser.profilePic ? "/uploads/"+currentUser.profilePic :"/uploads/no-image.webp"} alt={currentUser.firstName}  />}
+        {skeleton && isFirstLoading ? <LoadingSkeleton circle="true"/> :  <Avatar src={currentUser.profilePic} alt={currentUser.firstName}/>}
    
         </Link>
 
