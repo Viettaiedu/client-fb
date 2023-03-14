@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiTwotoneVideoCamera, AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Button from "../Button";
-import { getUserFriends } from "../../redux/actions/user";
-import { useContext, useEffect, useState } from "react";
+import { getUserFriends, getUserOthers } from "../../redux/actions/user";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
 import { UserContext } from "../../context/authContext";
-import httpsRequest from "../../api/axios";
 function RightBar() {
   const { userFriends } = useSelector((state) => state.userFriends);
-  const [userOthers, setUserOthers] = useState([]);
+  const { userOthers } = useSelector((state) => state.userOthers);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUserFriends());
-  }, [dispatch]);
   const {currentUser} =useContext(UserContext);
+  useEffect(() => {
+    dispatch(getUserFriends(currentUser.id));
+    dispatch(getUserOthers(currentUser.id));
+  }, [dispatch]);
   const suggestAddFriends = [
     {
       image:
@@ -25,18 +25,6 @@ function RightBar() {
       createdAt: "7 giờ",
     },
   ];
-
-  useEffect(() => {
-   const getUserOthers = async () => {
-     try {
-          const {data} = await httpsRequest.get('/users/others');
-          setUserOthers(data);
-        }catch(e) {
-          console.log("error" ,e);
-        }
-    }
-    getUserOthers();
-  },[])
   return (
     <div className="right-bar">
       <div className="right-bar__items">

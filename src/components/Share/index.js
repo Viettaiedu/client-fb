@@ -6,10 +6,10 @@ import CreatePost from "./CreatePost";
 
 
 import { useContext, useEffect, useRef, useState } from "react";
-import ErrorMesssage from "../Model/ErrorMessage";
+import ErrorMesssage from "../Modal/ErrorMessage";
 import { Link } from "react-router-dom";
 import { routesPublic } from "../../config/routes";
-import Spinner from "../Model/Spinner";
+import Spinner from "../Modal/Spinner";
 import { UserContext } from "../../context/authContext";
 import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;

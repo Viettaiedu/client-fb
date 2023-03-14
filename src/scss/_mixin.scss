@@ -45,19 +45,20 @@ $themes: (
   @return map-get($theme-map, $key);
 }
 
-@mixin hoverAvatar($color: $gray-light) {
+@mixin hover-light-gray( $borderRadius: 0px ,$backgroundColor:rgba(0, 0, 0, 0.1)) {
   &::after {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: $borderRadius;
     content: "";
-    border-radius: 50%;
     transition: background-color 0.1s linear;
+    cursor: pointer;
   }
   &:hover::after {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $backgroundColor;
   }
 }
 

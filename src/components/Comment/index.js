@@ -1,10 +1,14 @@
 import moment from "moment";
+import PropTypes from "prop-types";
 import { TfiClose } from "react-icons/tfi";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+
+
+// Myimports
 import { deleteComment } from "../../redux/actions/comment";
 import { UserContext } from "../../context/authContext";
-import EditComment from "../Model/EditComment";
+import EditComment from "../Modal/EditComment";
 import LoadingSkeleton from "../LoadingSkeleton";
 let isFirstLoading = true;
 function Comment({ comment, postId }) {
@@ -106,4 +110,8 @@ function Comment({ comment, postId }) {
   );
 }
 
+Comment.propTypes = {
+  comment : PropTypes.object,
+   postId : PropTypes.string || PropTypes.number
+}
 export default Comment;

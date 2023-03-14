@@ -1,8 +1,464 @@
-
-@use '../../scss/' as *;
+@use "../../scss/" as *;
 
 .profile {
-    @include themify($themes) {
-        
+  @include themify($themes) {
+    background-color: themed(bgSoft);
+    height: 100vh;
+    width: 100%;
+    &__top {
+      height: 680px;
+      position: relative;
+      background-image: linear-gradient(
+        to bottom,
+        #ff000026,
+        #ff00003d,
+       white 50%
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-box-shadow: -1px 11px 10px -10px rgba(0, 0, 0, 0.81);
+      -moz-box-shadow: -1px 11px 10px -10px rgba(0, 0, 0, 0.81);
+      box-shadow: -1px 11px 10px -10px rgba(0, 0, 0, 0.81);
+      @include desktop {
+        height: 520px;
+      }
+      &__info {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0px 200px;
+        @include desktop-xl {
+            margin: 0px;
+        }
+     
+          &__cover-pic {
+              height: 465px;
+              width: 100%;
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+              position: absolute;
+              top:0;
+              left: 0;
+              right: 0;
+              border-radius: 0px 0px 10px 10px;
+              @include desktop-xl {
+                border-radius: 0px;
+            }
+            @include desktop {
+              height: 235px;
+            }
+              &__edit {
+                  position: absolute;
+                  top:90%;
+                  right: 20px;
+                  flex:1;
+                  z-index: 2;
+                  background-color:white ;
+                  color:black;
+                  font-weight: 600;
+                  font-size: 1.5rem;
+                  outline: none;
+                  border: none;
+                  border-radius: 5px;
+                  padding: 10px 14px;
+                  display: flex;
+                  gap:5px;
+                  @include hover-light-gray($borderRadius:5px);
+                  svg {
+                      font-size: 1.5rem;
+                  }
+                  @include desktop {
+                    top: 80%;
+                  }
+                  span {
+                    display: flex;
+                    align-items: center;
+                    gap:5px;
+                  }
+
+                  &__modal {
+                    position: absolute;
+                    top:100%;
+                    right: 0;
+                    border-radius: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    width: 350px;
+                    background-color: themed(bg);
+                    @include box-shadow;
+                    padding: 10px;
+                    gap:4px;
+                    &__one {
+                      padding: 6px 10px;
+                      width: 100%;
+                      display: flex;
+                      position: relative;
+                      gap:16px;
+                      align-items: center;
+                      font-size: 1.4rem;
+                      font-weight: 200;
+                      @include hover-light-gray($borderRadius:5px , $backgroundColor:rgba(128, 128, 128, 0.115));
+                      svg {
+                        font-size: 2.4rem;
+                      }
+
+                      &:last-child {
+                        margin-top: 4px;
+                        position: relative;
+                        &::before {
+                          position: absolute;
+                          content: "";
+                          top:-5px;
+                          left: 0;
+                          right: 0;
+                          height: 1px;
+                          width: 100%;
+                          background-color: gray;
+
+                        }
+                      }
+                    }
+                  }
+              }
+          }
+          &__user {
+              position: absolute;
+              top: 64%;
+              left: 0px;
+              display: flex;
+              right: 0;
+              justify-content: space-between;
+                padding: 0px 20px;
+                margin-bottom: 20px;
+
+                @include desktop {
+                  
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  top: 22%;
+                }
+              &::after {
+                  content: "";
+                  position: absolute;
+                  top:calc(100% + 10px);
+                  left: 0;
+                  right: 0;
+                  height: 1px;
+                  background-color: rgba(128, 128, 128, 0.689);
+
+              }
+              &__left {
+                display: flex;
+                gap:10px;
+                flex:1;
+                @include desktop {
+                  
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  top: 56%;
+                  width: 100%;
+                }
+                &__avatar {
+                    @include flex-center;
+                    position: relative;
+                    cursor: pointer;
+                   border: 2px solid white;
+                    border-radius: 50%;
+                    &__image {
+                        width: 160px;
+                        height: 160px;
+                        border-radius: 50%;
+                        border: 4px solid white;
+                        @include flex-center;
+                        position: relative;
+                        overflow: hidden;
+                        @include hover-light-gray;
+                        img {
+                            width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+                    
+                    div {
+                        width: 38px;
+                        height: 38px;
+                        position: absolute;
+                        bottom:20px;
+                        right: -5px;
+                        border-radius: 50%;
+                        font-size: 2rem;
+                        @include flex-center;
+                        background-color: #E4E6EA;
+                        &::after {
+                            position: absolute;
+                            top:0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            content: "";
+                            border-radius: 50%;
+                            transition: background-color 0.2s linear;
+                        }
+
+                        &:hover:after {
+                            background-color: rgba(0,0,0,0.2);
+                        }
+                    }
+                }
+
+                &__info {
+                    display: flex;
+                    justify-content: center;
+                    gap:3px;
+                    flex-direction: column;
+                    @include desktop {
+                      flex-direction: column;
+                      gap:5px;
+                      align-items: center;
+                    }
+                    h3 {
+                        font-size: 2.7rem;
+                        font-weight: 600;
+                        color:themed(textColor);
+                    }
+
+                    span {
+                        font-size: 1.5rem;
+                        color: #65676B;
+                        font-weight: 600;
+                        margin-left: 4px;
+                    }
+                    &__list-image {
+                        position: relative;
+                        display: flex;
+                        margin-top: 5px;
+                        width: 100%;
+                        a {
+                            width: 38px;
+                            height: 38px;
+                            border-radius: 50%;
+                            display: flex;
+                            border: 2px solid white;
+                            cursor: pointer;
+                            position: relative;
+                            overflow: hidden;
+                            @include hover-light-gray;
+                          &:nth-child(1)  {
+                              position:absolute;
+                              left:0px;
+                              z-index: 9;
+                          }
+                          &:nth-child(2)  {
+                            position:absolute;
+                            left:25px;
+                            z-index: 8;
+                          }
+                          &:nth-child(3)  {
+                            position:absolute;
+                            left:50px;
+                            z-index: 7;
+                          }
+                          &:nth-child(4)  {
+                            position:absolute;
+                            left:75px;
+                            z-index: 6;
+                          }
+                          &:nth-child(5)  {
+                            position:absolute;
+                            left:100px;
+                            z-index: 5;
+                          }
+                          &:nth-child(7)  {
+                            position:absolute;
+                            left:125px;
+                            z-index: 4;
+                          }
+                          &:nth-child(8)  {
+                            position:absolute;
+                            left:150px;
+                            z-index: 3;
+                          }
+                       
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+                }
+              }
+
+              &__right {
+                display: flex;
+                gap:10px;
+                flex:1;
+                justify-content: flex-end;
+                align-items: center;
+                button {
+                    height: 35px;
+                    margin-top: 100px;
+                    padding: 0px 10px;
+                    outline: none;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap:5px;
+                    position: relative;
+                    @include desktop{
+                      margin-top:60px;
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 5px;
+                        left: 0;
+                        transition: background-color 0.1s linear;
+                    }
+                    &:hover::after {
+                        background-color: $gray-light;
+                    }
+                    
+                    svg {
+                        font-size: 2rem;
+                    }
+                }
+                &__primary {
+                    background-color:$primary-color;
+                    color:white;
+                    font-weight: 600;
+                }
+                &__gray {
+                    background-color:#E4E6EA;
+                    color:black;
+                    font-weight: 600;
+                }
+              }
+          }
+          &__desc {
+            position: absolute;
+            bottom: 11px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &__left {
+              display: flex;
+             gap:4px;
+              span {
+                font-weight: 400;
+                font-size: 1.6rem;
+                padding: 15px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.1s linear;
+                &:hover {
+                  background-color: rgba(128, 128, 128, 0.152);
+                }
+              }
+
+              & .select {
+                color:$primary-color;
+                position: relative;
+                &::after {
+                  position: absolute;
+                  bottom:-11px;
+                  content: "";
+                  left: 0;
+                  right: 0;
+                  background-color: $primary-color;
+                  height: 2px;
+                  width: 100%;
+
+                  
+                }
+                &:hover {
+                  background-color: none;
+                }
+              }
+            }
+            &__right {
+              background-color: rgba(183, 181, 181, 0.324);
+              border-radius: 5px;
+              @include flex-center;
+              padding: 8px 14px;
+              font-size: 2.2rem;
+              cursor: pointer;
+              position: relative;
+              @include hover-light-gray($borderRadius:5px);
+              
+            }
+          }
+      }
+      &__confirm-edit {
+        background-color: rgba(0, 0, 0, 0.452);
+        height: 50px;
+        width: 100%;
+        position: absolute;
+        top:0px;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap:10px;
+        padding: 0px 10px;
+        button {
+          padding: 9px 30px;
+          border: none;
+          outline: none;
+          border-radius: 5px;
+          color:white;
+          font-size: 1.7rem;
+        }
+        &__save {
+          background-color: $primary-color;
+          position: relative;
+          @include hover-light-gray($borderRadius:5px,$backgroundColor:rgba(255, 255, 255, 0.113))
+        }
+        &__reject {
+          background-color: rgba(255, 255, 255, 0.113);
+          position: relative;
+          @include hover-light-gray($borderRadius:5px,$backgroundColor:rgba(255, 255, 255, 0.113))
+        }
+      }
     }
+
+    .modal-remove {
+      position: fixed;
+      top:0;
+      left: 0;
+      right: 0;bottom: 0;
+      @include flex-center;
+      z-index: 99;
+      background-color: rgba(255, 255, 255, 0.55);
+
+      &__wrapper {
+        background-color: white;
+        @include box-shadow;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        span {
+          @include flex-center;
+        }
+      }
+    }
+  }
 }

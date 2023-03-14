@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import httpsRequest from "../../api/axios";
-import Spinner from "../../components/Model/Spinner";
+import Spinner from "../../components/Modal/Spinner";
 import { UserContext } from "../../context/authContext";
 import "./login.scss";
 function Login() {
@@ -37,7 +37,6 @@ function Login() {
           if(!inputs[e.target.name]) {
             setErrPassword(
               "Ờ kìa nhập mật khẩu đi chứ !"
-
             );
             e.target.style.border = "1px solid red";
           }else{
@@ -54,11 +53,8 @@ function Login() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowSpinner(true);
     const el = document.querySelector('.err-account');
-    setTimeout( async () => {
-      setShowSpinner(false);
-      if(!inputs.email || !inputs.password && errEmail && errPassword) {
+      if(!inputs.email || !inputs.password && !errEmail && errPassword) {
         el.textContent = "Bạn phải đăng nhập mới vào được !";
         return;
       }
@@ -66,18 +62,24 @@ function Login() {
             try {
               const {data} = await httpsRequest.post('/auth/login', inputs)
                 if(data) {
-                  setErrEmail("")
+                  setShowSpinner(true);
+                  setTimeout( () => {
+                    setShowSpinner(false);
+                    setErrEmail("")
                   setErrPassword("")
                   el.textContent = "";
                   login(data.info);
                   navigate('/');
-               
+                  },(3*1000))
+                  
                 }
             }catch(e) {
-              el.textContent = e.response.data.message;
+              if(inputs.password.length >=6)el.textContent = e.response.data.message;
+              
+              
             }
       }
-    },(4 * 1000))
+    
  
   
   };

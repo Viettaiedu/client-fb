@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 // My imports
 import "./register.scss";
 import httpsRequest from "../../api/axios";
-import ModelSuccess from "../../components/Model/Success";
+import ModelSuccess from "../../components/Modal/Success";
 function Register() {
   const [inputs, setInputs] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -31,13 +31,13 @@ function Register() {
 
   const handleBlur = (e) => {
     switch (e.target.name) {
-      case "firstname":
+      case "firstName":
         if (inputs[e.target.name]) break;
         setErrFirstName("Tên của bạn là gì");
         e.target.style.border = "1px solid red";
         setErrSubmit(true);
         break;
-      case "lastname":
+      case "lastName":
         if (inputs[e.target.name]) break;
         setErrLastName("Họ của bạn là gì");
         e.target.style.border = "1px solid red";
@@ -67,7 +67,7 @@ function Register() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!inputs.email || inputs.password || !inputs.firstname || !inputs.lastname) {
+    if(!inputs.email || inputs.password || !inputs.firstName || !inputs.lastName) {
         if(!errSubmit) {
           try {
             const {data} = await httpsRequest.post('/auth/register', inputs)
@@ -88,6 +88,7 @@ function Register() {
   const handleClick = (e) => {
     navigate('/login');
   }
+  console.log()
   return (
     <div className="wrapper">
       <div className="wrapper__logo">
@@ -110,7 +111,7 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Họ"
-                  name="firstname"
+                  name="firstName"
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -121,7 +122,7 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Tên"
-                  name="lastname"
+                  name="lastName"
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />

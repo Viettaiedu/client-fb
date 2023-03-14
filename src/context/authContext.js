@@ -11,6 +11,9 @@ export const ProviderUserContext = ({children}) => {
     const logout = () => {
         setCurrentUser(null);
     }
+    const update = (info) => {
+        setCurrentUser(info);
+    }
     useEffect(() => {
             localStorage.setItem('user' ,JSON.stringify(currentUser) );
             setTimeout(() => {
@@ -19,7 +22,7 @@ export const ProviderUserContext = ({children}) => {
     },[currentUser])
 
     return (
-        <UserContext.Provider  value={{login , logout , currentUser}}>
+        <UserContext.Provider  value={{login , logout ,update, currentUser}}>
             {children}
         </UserContext.Provider>
     )

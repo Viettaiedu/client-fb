@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { UserContext } from "../../../context/authContext";
 import { useDispatch } from "react-redux";
@@ -74,4 +75,9 @@ const EditComment = ({ desc, id, setShowEditComment }) => {
   );
 };
 
+EditComment.propTypes = {
+  desc : PropTypes.string,
+   id :PropTypes.string || PropTypes.number , 
+   setShowEditComment : PropTypes.func
+}
 export default EditComment;

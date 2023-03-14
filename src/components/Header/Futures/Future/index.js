@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
+import PropTypes from "prop-types";
 import httpsRequest from "../../../../api/axios";
 import { accountFutures, screenFutures } from "../../../../assets/futures";
 import { UserContext } from "../../../../context/authContext";
 import { DarkModeContext } from "../../../../context/darkModeContext";
-import Spinner from "../../../Model/Spinner";
+import Spinner from "../../../Modal/Spinner";
 function Future({ future, fcShowFutures, typeOther }) {
   const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
   const [showSpinner ,setShowSpinner] = useState(false);
@@ -102,4 +103,8 @@ function Future({ future, fcShowFutures, typeOther }) {
   );
 }
 
+Future.propTypes = {
+  future : PropTypes.string,
+   fcShowFutures : PropTypes.object,
+}
 export default Future;

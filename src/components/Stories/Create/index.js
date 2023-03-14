@@ -15,7 +15,7 @@ import { UserContext } from "../../../context/authContext";
 import Button from "../../Button";
 import httpsRequest from "../../../api/axios";
 import { addStory } from "../../../redux/actions/story";
-import Spinner from "../../Model/Spinner";
+import Spinner from "../../Modal/Spinner";
 import LoadingSkeleton from "../../LoadingSkeleton";
 let isFirstLoading = true;
 function Create() {

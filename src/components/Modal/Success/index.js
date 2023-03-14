@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 import { forwardRef } from 'react';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import './model-success.scss';
@@ -16,5 +16,8 @@ const ModelSuccess= forwardRef(({message ,handleClick} , ref) => {
 
 
 })
-    
+ModelSuccess.propTypes = {
+    message : PropTypes.string ,
+    handleClick : PropTypes.func
+}
 export default ModelSuccess;

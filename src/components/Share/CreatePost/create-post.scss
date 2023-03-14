@@ -79,7 +79,7 @@
               border-radius: 50%;
               object-fit: cover;
             }
-            @include hoverAvatar;
+            @include hover-light-gray;
           }
           &__name {
             font-size: 1.6rem;

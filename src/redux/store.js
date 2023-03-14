@@ -5,7 +5,7 @@ import {postsReducer} from './reducers/post';
 import {storiesReducer} from './reducers/story';
 import {likesReducer} from './reducers/like';
 import {commentsReducer} from './reducers/comment';
-import {userFriendsReducer} from './reducers/user';
+import {userFriendsReducer , userOthersReducer , userProfileReducer} from './reducers/user';
 import Raven from 'raven-js';
 const crashReporter = store => next => action => {
     try {
@@ -23,6 +23,8 @@ const crashReporter = store => next => action => {
   }
 const reducer = combineReducers({
   userFriends:userFriendsReducer,
+  userProfile:userProfileReducer,
+  userOthers:userOthersReducer,
     posts:postsReducer,
     comments:commentsReducer,
     likes:likesReducer,
